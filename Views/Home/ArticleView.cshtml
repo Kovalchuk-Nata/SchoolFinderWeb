@@ -1,0 +1,23 @@
+﻿@using SchoolFinderWeb.Models
+@model Article
+@{
+    ViewData["Title"] = "Articles";
+}
+
+<!-- Breadcrumb Area Start -->
+<section class="breadcrumb-area section-padding-80">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-content">
+                    <h4 class="mb-30 article-title">@Model.Title</h4>
+                </div>
+            </div>
+        </div>
+        <div class="article-details col-12">
+            <p class ="article-details">@Model.Description</p>
+            <p class="article-details">@Model.Content</p>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Area End -->

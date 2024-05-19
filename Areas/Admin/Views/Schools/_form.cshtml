@@ -1,0 +1,68 @@
+﻿@model SchoolFinderWeb.Models.School
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<div class="mb-3">
+    <label asp-for="Name"></label>
+    <input asp-for="Name" class="form-control" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Address"></label>
+    <input asp-for="Address" class="form-control" />
+    <span asp-validation-for="Address" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="District"></label>
+    <select asp-for="District" class="form-control">
+        <option value="Богунський">Богунський</option>
+        <option value="Корольовський">Корольовський</option>
+    </select>
+    <span asp-validation-for="District" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Type"></label>
+    <select asp-for="Type" class="form-control">
+        <option value="Державна">Державна</option>
+        <option value="Приватна">Приватна</option>
+    </select>
+    <span asp-validation-for="Type" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Price"></label>
+    <input asp-for="Price" class="form-control" />
+    <span asp-validation-for="Price" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="ExtendedDayGroups"></label>
+    <input asp-for="ExtendedDayGroups" type="checkbox" />
+    <span asp-validation-for="ExtendedDayGroups" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Specialization"></label>
+    <input asp-for="Specialization" type="checkbox" />
+    <span asp-validation-for="Specialization" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="AdditionalOpportunities"></label>
+    <input asp-for="AdditionalOpportunities" type="checkbox" />
+    <span asp-validation-for="AdditionalOpportunities" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Description"></label>
+    <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+    <span asp-validation-for="Description" class="text-danger"></span>
+</div>
+<!-- 
+    <div class="mb-3">
+    <label asp-for="Photo"></label>
+    <input asp-for="Photo" type="file" class="form-control" />
+    <span asp-validation-for="Photo" class="text-danger"></span>
+</div>
+-->
+
+<div class="mb-3">
+    <label asp-for="isConfirmed"></label>
+    <input asp-for="isConfirmed" type="checkbox" />
+    <span asp-validation-for="isConfirmed" class="text-danger"></span>
+</div>

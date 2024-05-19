@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using SchoolFinderWeb.Data;
 using SchoolFinderWeb.Models;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,6 +47,23 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+var supportedCultures = new[]
+            {
+                new CultureInfo("ru-RU"),
+                new CultureInfo("ru")
+            };
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("ru-RU"),
+    SupportedCultures = supportedCultures,
+    SupportedUICultures = supportedCultures
+});
+
+app.MapAreaControllerRoute(
+            name: "MyAreaAdmin",
+            areaName: "Admin",
+            pattern: "Admin/{controller=Homes}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",

@@ -1,0 +1,23 @@
+﻿@model Article
+@{
+    ViewData["Title"] = "Delete user";
+}
+
+<h1>Delete article?</h1>
+
+<form method="post" asp-action="Delete">
+    <div class="border p-3 mt-4">
+        <input asp-for="ArticleID" hidden />
+       <div class="mb-3">
+            <label asp-for="ArticleID"></label>
+            <input asp-for="ArticleID" class="form-control" readonly />
+            <span asp-validation-for="ArticleID"></span>
+        </div>
+        <div asp-validation-summary="All"></div>
+
+        <partial name="_form" readonly />
+
+        <button type="submit" class="btn btn-primary" style="width:150px">Delete</button>
+    </div>
+
+</form>

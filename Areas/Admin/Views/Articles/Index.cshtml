@@ -1,0 +1,31 @@
+﻿@using NonFactors.Mvc.Grid;
+@using SchoolFinderWeb.Models
+@model IQueryable<Article>
+
+@{
+    ViewBag.Title = "Articles";
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-sm btn-info">Create</a>
+</p>
+
+@(Html
+    .Grid(Model)
+    .Build(columns =>
+    {
+        columns.Add(model => model.ArticleID).Titled("ArticleID");
+        columns.Add(model => model.Title).Titled("Title");
+        columns.Add(model => model.Description).Titled("Description");
+
+        columns.Add(model => $"<a class=\"btn btn-sm btn-primary\" href=\"Articles\\Edit\\{model.ArticleID}\">Edit</a>  " +
+            $"<a class=\"btn btn-sm btn-danger\" href=\"Articles\\Delete\\{model.ArticleID}\">Delete</a>"
+            ).Encoded(false);
+
+    })
+    .Using(GridFilterMode.Row)
+    .Empty("")
+    .Filterable()
+    .Sortable()
+    .Pageable()
+)

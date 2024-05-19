@@ -1,0 +1,85 @@
+﻿@model School
+@{
+    ViewData["Title"] = "Delete school";
+}
+
+<h1>Delete?</h1>
+
+<form method="post" asp-action="Delete">
+    <div class="border p-3 mt-4">
+        <input asp-for="SchoolID" hidden />
+        <div class="mb-3">
+            <label asp-for="SchoolID"></label>
+            <input asp-for="SchoolID" class="form-control" />
+            <span asp-validation-for="SchoolID"></span>
+        </div>
+        <div asp-validation-summary="All"></div>
+
+        <div class="mb-3">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Address"></label>
+            <input asp-for="Address" class="form-control" />
+            <span asp-validation-for="Address"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="District"></label>
+            <select asp-for="District" class="form-control">
+                <option value="Богунський">Богунський</option>
+                <option value="Корольовський">Корольовський</option>
+            </select>
+            <span asp-validation-for="District"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Type"></label>
+            <select asp-for="Type" class="form-control">
+                <option value="Державна">Державна</option>
+                <option value="Приватна">Приватна</option>
+            </select>
+            <span asp-validation-for="Type"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Price"></label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="ExtendedDayGroups"></label>
+            <input asp-for="ExtendedDayGroups" type="checkbox" />
+            <span asp-validation-for="ExtendedDayGroups" ></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Specialization"></label>
+            <input asp-for="Specialization" type="checkbox" />
+            <span asp-validation-for="Specialization"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="AdditionalOpportunities"></label>
+            <input asp-for="AdditionalOpportunities" type="checkbox" />
+            <span asp-validation-for="AdditionalOpportunities" ></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+            <span asp-validation-for="Description" ></span>
+        </div>
+        <!-- 
+            <div class="mb-3">
+            <label asp-for="Photo"></label>
+            <input asp-for="Photo" type="file" class="form-control" />
+            <span asp-validation-for="Photo" ></span>
+        </div>
+        -->
+        
+        <div class="mb-3">
+            <label asp-for="isConfirmed"></label>
+            <input asp-for="isConfirmed" type="checkbox" />
+            <span asp-validation-for="isConfirmed"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">Delete</button>
+    </div>
+
+</form>

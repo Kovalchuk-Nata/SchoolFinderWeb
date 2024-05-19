@@ -1,0 +1,22 @@
+﻿@model Article
+@{
+    ViewData["Title"] = "Edit article";
+}
+
+
+<form method="post" asp-action="Edit">
+    <div cclass="border p-3 mt-4">
+        <input asp-for="ArticleID" hidden />
+       <div class="mb-3">
+            <label asp-for="ArticleID"></label>
+            <input asp-for="ArticleID" class="form-control" readonly />
+            <span asp-validation-for="ArticleID"></span>
+        </div>
+        <div asp-validation-summary="All"></div>
+
+        <partial name="_form" />
+
+        <button type="submit" class="btn btn-primary" style="width:150px">Edit</button>
+    </div>
+
+</form>

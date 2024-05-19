@@ -12,6 +12,6 @@ namespace SchoolFinderWeb.ViewModels
         public bool? IsExtendedDayGroups { get; set; }
         public bool? IsSpecialization { get; set; }
         public bool? IsAdditionalOpportunities { get; set; }
-       // public List<School> Schools { get; set; } = new();
+        public List<School> Schools { get; set; } = new();
     }
 }

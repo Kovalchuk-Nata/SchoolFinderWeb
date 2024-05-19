@@ -1,0 +1,33 @@
+﻿@using NonFactors.Mvc.Grid;
+@using SchoolFinderWeb.Models
+
+@model IQueryable<User>
+@{
+    ViewBag.Title = "Users";
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-sm btn-info">Create</a>
+</p>
+
+@(Html
+    .Grid(Model)
+    .Build(columns =>
+    {
+        columns.Add(model => model.FirstName).Titled("First Name");
+        columns.Add(model => model.LastName).Titled("Last Name");
+        columns.Add(model => model.Email).Titled("Email");
+        //columns.Add(model => model.Password).Titled("Password").RenderValueAs(model => "********"); // Пароль не відображається повністю
+        columns.Add(model => model.UserType).Titled("User Type");
+
+        columns.Add(model => $"<a class=\"btn btn-sm btn-primary\" href=\"Users\\Edit\\{model.Id}\">Edit</a>  " +
+            $"<a class=\"btn btn-sm btn-danger\" href=\"Users\\Delete\\{model.Id}\">Delete</a>"
+            ).Encoded(false);
+
+    })
+    .Using(GridFilterMode.Row)
+    .Empty("")
+    .Filterable()
+    .Sortable()
+    .Pageable()
+)

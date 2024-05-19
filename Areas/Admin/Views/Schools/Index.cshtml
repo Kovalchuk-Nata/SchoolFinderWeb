@@ -1,0 +1,39 @@
+﻿@using NonFactors.Mvc.Grid;
+@using SchoolFinderWeb.Models
+
+@model IQueryable<School>
+@{
+    ViewBag.Title = "Schools";
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-sm btn-info">Create</a>
+</p>
+
+@(Html
+    .Grid(Model)
+    .Build(columns =>
+    {
+        columns.Add(model => model.SchoolID).Titled("ID");
+        columns.Add(model => model.Name).Titled("Назва");
+        //columns.Add(model => model.Address).Titled("Адреса");
+        columns.Add(model => model.District).Titled("Район");
+        columns.Add(model => model.Type).Titled("Тип");
+        columns.Add(model => model.Price).Titled("Вартість");
+        columns.Add(model => model.ExtendedDayGroups).Titled("Група ПД");
+        columns.Add(model => model.Specialization).Titled("Спеціалізація");
+        columns.Add(model => model.AdditionalOpportunities).Titled("AdditionalOpportunities");
+        //columns.Add(model => model.Description).Titled("Description");
+        columns.Add(model => model.isConfirmed).Titled("Підтверджено");
+
+        columns.Add(model => $"<a class=\"btn btn-sm btn-primary\" href=\"Schools\\Edit\\{model.SchoolID}\">Редагувати</a>  " +
+            $"<a class=\"btn btn-sm btn-danger\" href=\"Schools\\Delete\\{model.SchoolID}\">Видалити</a>"
+            ).Encoded(false);
+
+    })
+    .Using(GridFilterMode.Row)
+    .Empty("")
+    .Filterable()
+    .Sortable()
+    .Pageable()
+)

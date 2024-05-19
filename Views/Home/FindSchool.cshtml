@@ -1,0 +1,197 @@
+﻿@using SchoolFinderWeb.ViewModels
+@model FindSchoolViewModel
+@{
+    ViewData["Title"] = "Find cool school";
+}
+
+<!-- Breadcrumb Area Start -->
+<section class="breadcrumb-area section-padding-80 bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-content">
+                    <h2>Обрати школу</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/">
+                                    <i class="icon_house_alt"></i>
+                                    Головна
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Обрати школу</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Area End -->
+<!-- School Selection Area Start -->
+<section class="akame-portfolio section-padding-80 clearfix">
+    <div class="container">
+        <div class="row">
+            <!-- Фильтры/Критерии Start -->
+            <div class="col-lg-3">
+                <div class="portfolio-filters">
+                    <h3 class="filter-h3">Фільтри</h3>
+                    <!-- Border -->
+                    <div class="container">
+                        <div class="border-top mt-3"></div>
+                    </div>
+
+                    <form method="get">
+                        <div>
+                            <h4>Тип школи</h4>
+                            @foreach (var type in Model.Types)
+                            {
+                                <div>
+                                    <input type="checkbox" id="type_@type" name="SelectedTypes" value="@type" @(Model.SelectedTypes.Contains(type) ? "checked" : "") />
+                                    <label for="category_@type">@type</label>
+                                </div>
+                            }
+                        </div>
+                        <br>
+                        <div>
+                            <h4>Район міста</h4>
+                            @foreach (var district in Model.Districts)
+                            {
+                                <div>
+                                    <input type="checkbox" id="district_@district" name="SelectedDistricts" value="@district" @(Model.SelectedDistricts.Contains(district) ? "checked" : "") />
+                                    <label for="brand_@district">@district</label>
+                                </div>
+                            }
+                        </div>
+                        <br>
+                        <div>
+                            <h4>Вартість навчання, до</h4>
+                            <input type="number" class="form-control" id="maxPrice" name="MaxPrice" value="@(Model.MaxPrice ?? null)" />
+                        </div>
+                        <br>
+                        <div>
+                            <h4>Группа продовженного дня</h4>
+                            <label class="filter-label"><input type="checkbox" id="isExtendedDayGroups" name="IsExtendedDayGroups" value="true" @(Model.IsExtendedDayGroups.HasValue && Model.IsExtendedDayGroups.Value ? "checked" : "") /> Так</label>
+                        </div>
+                        <div class="filter-widget">
+                            <h4>Поглиблене навчання</h4>
+                            <p>(гуманітарне/математичне тощо)</p>
+                            <label class="filter-label"><input type="checkbox" id="isSpecialization" name="IsSpecialization" value="true" @(Model.IsSpecialization.HasValue && Model.IsSpecialization.Value ? "checked" : "")> Так</label>
+                        </div>
+                        <div class="filter-widget">
+                            <h4>Додаткові освітні можливості</h4>
+                            <p>(програми або активності, такі як спорт, мистецтво, мови, наукові клуби)</p>
+                            <label class="filter-label"><input type="checkbox" id="isAdditionalOpportunities" name="IsAdditionalOpportunities" value="true" @(Model.IsAdditionalOpportunities.HasValue && Model.IsAdditionalOpportunities.Value ? "checked" : "")> Так</label>
+                        </div>
+                        <button type="submit" class="btn akame-btn">Пошук</button>
+                    </form>
+                    <br>
+                    <br>
+
+                    <form method="get">
+                        @*<div class="filter-widget">
+                            <h4>Тип школи</h4>
+                            <label class="filter-label"><input type="checkbox"> Державна</label>
+                            <label class="filter-label"><input type="checkbox"> Приватна</label>
+                        </div>*@
+                        <div class="filter-widget">
+                            <h4>??? Формат навчання ???</h4>
+                            <label class="filter-label"><input type="checkbox"> Офлайн</label>
+                            <label class="filter-label"><input type="checkbox"> Дистанційне</label>
+                            <label class="filter-label"><input type="checkbox"> Онлайн</label>
+                        </div>
+                        @*<div class="filter-widget">
+                            <h4>Ціна навчання</h4>
+                            <label class="filter-label"><input class="form-control" type="input"></label>
+                        </div>*@
+                        @*<div class="filter-widget">
+                            <h4>Район міста</h4>
+                            <label class="filter-label"><input type="checkbox"> Богунський</label>
+                            <label class="filter-label"><input type="checkbox"> Корольовський</label>
+                        </div>*@
+                        @*<div class="filter-widget">
+                            <h4>Группа продовженного дня</h4>
+                            <label class="filter-label"><input type="checkbox"> Так</label>
+                        </div>*@
+ @*                       <div class="filter-widget">
+                            <h4>Поглиблене навчання</h4>
+                            <p>(гуманітарне/математичне тощо)</p>
+                            <label class="filter-label"><input type="checkbox"> Так</label>
+                        </div>
+                        <div class="filter-widget">
+                            <h4>Додаткові освітні можливості</h4>
+                            <p>(програми або активності, такі як спорт, мистецтво, мови, наукові клуби)</p>
+                            <label class="filter-label"><input type="checkbox"> Так</label>
+                        </div>*@
+                        <!-- Додати інші критерії фільтрації тут -->
+@*                        <button type="submit" class="btn akame-btn">Пошук</button>
+*@                    </form>
+                </div>
+
+            </div>
+            <!-- Фильтри/Критерії End -->
+
+            <div class="col-lg-9">
+                <!-- Результати вибору шкіл -->
+                <div class="">
+                    @if(Model.Schools.Count > 0) {
+                        foreach (var school in Model.Schools)
+                        {
+                            <div class="single-service-area mb-30 wow fadeInUp school-results"
+                             data-wow-delay="200ms">
+                                <div class="">
+                                    <img src="img/core-img/education.png" alt="" width="128px">
+                                </div>
+                                <div class="col school-text-name">
+                                    <a href="/findschool/@school.SchoolID" class="">
+                                        <h4>Школа #1 ID: @school.Name</h4>
+                                        <p>
+                                            @school.Type школа, Ціна: від ₴@school.Price, Район: @school.District
+                                        </p>
+                                    </a>
+                                </div>
+                                <div class="heart-icon ml-5 mt-4 mt-lg-0">
+                                    <a href="#"><i class="icon_heart" onclick="addToFavorites(event, this, @school.SchoolID)"></i></a>
+                                </div>
+
+                            </div>
+                        }
+                    } else
+                    {
+                        <h5>Школи за Вашим запитом не знайдені. Спробуйте змінити параметри</h5>
+                    }
+
+                </div>
+            </div>
+            <!--
+            <div class="col-lg-9 bg-gray">
+                <div class="row akame-portfolio-area">
+                    <!-- Тут будуть виводитися результати шкіл --
+                    <!-- Структура виводу результатів аналогічна --
+                </div>
+            </div> -->
+        </div>
+    </div>
+</section>
+<!-- School Selection Area End -->
+
+<script>
+    function addToFavorites(event, element, SchoolID) {
+
+        event.preventDefault();
+
+        fetch('/Ajax/AddFavorites', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ SchoolID: SchoolID })
+        }).then(response => {
+            if (response.ok) {
+                element.style.color = '#4F9269';
+            } else {
+                alert('Помилка при додаванні у вибране.');
+            }
+        });
+    }
+</script>

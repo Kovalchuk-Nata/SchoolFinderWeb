@@ -1,0 +1,53 @@
+﻿@using NonFactors.Mvc.Grid;
+@using SchoolFinderWeb.Models
+@model IEnumerable<Article>
+@{
+    ViewData["Title"] = "Articles";
+}
+
+<!-- Breadcrumb Area Start -->
+<section class="breadcrumb-area section-padding-80">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-content">
+                    <h2>Корисні статті</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/">
+                                    <i class="icon_house_alt"></i>
+                                    Головна
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Корисні статті</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Area End -->
+
+<div class="col-lg-12">
+    <div class="row">
+        @(Html
+            .Grid(Model)
+            .Build(columns =>
+            {
+                columns.Add(model => $"<h5 class=\"articles-title\" >{model.Title}</h5>").Encoded(false);
+
+                columns.Add(model => $"<p class=\"articles-description single-service-area \">{model.Description}</p>").Encoded(false);
+
+                columns.Add(model => $"<a class=\"btn articles-btn akame-btn active\" href=\"articles\\{model.ArticleID}\">Читати</a>  "
+                ).Encoded(false);
+
+            })
+            .Using(GridFilterMode.Row)
+            .Empty("")
+            // .Pageable()
+            )
+    </div>
+</div>
+

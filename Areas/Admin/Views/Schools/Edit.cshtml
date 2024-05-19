@@ -1,0 +1,22 @@
+﻿@model School
+@{
+    ViewData["Title"] = "Edit school";
+}
+
+
+<form method="post" asp-action="Edit">
+    <div class="border p-3 mt-4">
+        <input asp-for="SchoolID" hidden />
+        <div class="mb-3">
+            <label asp-for="SchoolID"></label>
+            <input asp-for="SchoolID" class="form-control" readonly />
+            <span asp-validation-for="SchoolID"></span>
+        </div>
+        <div asp-validation-summary="All"></div>
+
+        <partial name="_form" />
+
+        <button type="submit" class="btn btn-primary" style="width:150px">Edit</button>
+    </div>
+
+</form>
