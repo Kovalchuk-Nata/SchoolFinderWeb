@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SchoolFinderWeb.Data;
 using SchoolFinderWeb.Models;
@@ -14,6 +15,12 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+// ƒобавление UserStore дл€ работы с пользовател€ми
+builder.Services.AddScoped<IUserStore<User>, UserStore<User, IdentityRole, ApplicationDbContext>>();
+builder.Services.AddScoped<IUserEmailStore<User>>(provider => (IUserEmailStore<User>)provider.GetRequiredService<IUserStore<User>>());
+
+
 builder.Services.AddControllersWithViews(); 
 builder.Services.AddRazorPages();
 

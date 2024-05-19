@@ -28,41 +28,52 @@ namespace SchoolFinderWeb.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
-        private readonly IUserStore<User> _userStore;
-        private readonly IUserEmailStore<User> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IUserStore<User> _userStore;
+        private readonly IUserEmailStore<User> _userEmailStore;
+        //private readonly IUserEmailStore<User> _emailStore;
+
+
 
         public RegisterModel(
             UserManager<User> userManager,
             IUserStore<User> userStore,
             SignInManager<User> signInManager,
             ILogger<RegisterModel> logger,
+            IUserEmailStore<User> emailStore,
             IEmailSender emailSender)
         {
             _userManager = userManager;
             _userStore = userStore;
+            _userEmailStore = emailStore;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
         }
 
-        
+
         [BindProperty]
         public InputModel Input { get; set; }
 
-        
+
         public string ReturnUrl { get; set; }
 
-       
+
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
-       
+
         public class InputModel
         {
-            
-            [Display(Name= "FirstName")]
+
+            [Display(Name = "FirstName")]
             public string FirstName { get; set; }
+
+            [Display(Name = "LastName")]
+            public string LastName { get; set; }
+
+            [Display(Name = "UserType")]
+            public UserTypes UserType { get; set; }
 
             [Required]
             [EmailAddress]
@@ -75,7 +86,7 @@ namespace SchoolFinderWeb.Areas.Identity.Pages.Account
             [Display(Name = "Password")]
             public string Password { get; set; }
 
-            
+
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
@@ -98,13 +109,29 @@ namespace SchoolFinderWeb.Areas.Identity.Pages.Account
                 var user = CreateUser();
 
                 user.FirstName = Input.FirstName;
+                user.LastName = Input.LastName;
+                user.UserType = Input.UserType;
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
-                await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                await _userEmailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
-                    _userManager.AddToRoleAsync(user, "Admin").Wait();
+                    // Додати користувача до ролі
+                    if (user.UserType == UserTypes.Parent)
+                    {
+                        _userManager.AddToRoleAsync(user, "Parent").Wait();
+                    }
+                    else if (user.UserType == UserTypes.Organizator)
+                    {
+                        _userManager.AddToRoleAsync(user, "Organizator").Wait();
+                    }
+                    else if (user.UserType == UserTypes.Admin)
+                    {
+                        _userManager.AddToRoleAsync(user, "Admin").Wait();
+                    }
+
+                    
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);

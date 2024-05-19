@@ -1,0 +1,92 @@
+
+
+.school-logo {
+    max-width: 82%;
+    height: auto;
+    display: block;
+    /*padding: 10px;*/
+}
+
+.welcome-bg {
+    background-color: #05160985;
+}
+
+.welcome-text-carousel{
+    color: #e5eaee;
+}
+
+.filter-widget {
+    margin: 15px 0;
+}
+
+.filter-label{
+    padding: 0 5px;
+    font-size: 17px;
+}
+
+.filter-h3 {
+    text-align: center;
+    font-weight: 200;
+}
+
+.school-results{
+    display: flex;
+}
+
+.school-text-name {
+    text-align: left;
+    padding-left: 30px;
+}
+
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-centre {
+    display: flex;
+    justify-content: center;
+}
+
+.articles-title{
+    margin: 10px;
+    padding: 0 50px;
+}
+
+.articles-description {
+    margin: 10px;
+}
+
+.articles-btn {
+    margin: 0 50px;
+}
+
+
+.article-details {
+    text-align: justify;
+}
+
+.article-title {
+    margin: 0 100px 30px 100px;
+}
+
+
+.school-title {
+    margin: 0 100px 30px 100px;
+    text-align: center;
+}
+
+.school-details {
+    margin-right: 120px;
+}
+
+.school-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+

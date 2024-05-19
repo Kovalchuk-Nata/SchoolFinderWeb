@@ -14,5 +14,7 @@ namespace SchoolFinderWeb.Models
         [Column(TypeName = "nvarchar(100)")]
         public string LastName { get; set; }
 
+        public UserTypes UserType { get; set; }
+
     }
 }
