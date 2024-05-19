@@ -7,7 +7,6 @@ namespace SchoolFinderWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
-    //[Authorize]
     public class ArticlesController : Controller
     {
         private readonly ApplicationDbContext schoolDB;

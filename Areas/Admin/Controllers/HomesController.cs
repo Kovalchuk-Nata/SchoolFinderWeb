@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace SchoolFinderWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     //[Authorize]
     public class HomesController : Controller
     {
