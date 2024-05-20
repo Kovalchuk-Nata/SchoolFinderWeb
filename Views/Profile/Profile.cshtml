@@ -1,3 +1,96 @@
-﻿<div class="text-center">
-    <h1 class="display-4">Hello this is admin page</h1>
-</div>
+﻿@model SchoolFinderWeb.Models.User
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<!-- Breadcrumb Area Start -->
+<section class="breadcrumb-area section-padding-80 bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-content">
+                    <h2>Профіль</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/">
+                                    <i class="icon_house_alt"></i>
+                                    Головна
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Профіль</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Area End -->
+<!-- School Selection Area Start -->
+<section class="akame-portfolio section-padding-80 clearfix">
+    <div class="container">
+        <div class="row">
+            <!-- Фильтры/Критерии Start -->
+            <div class="col-lg-3">
+                <div class="portfolio-filters">
+                    <h3 class="filter-h3">Привіт, @Model.FirstName!</h3>
+                    <!-- Border -->
+                    <div class="container">
+                        <div class="border-top mt-3"></div>
+                    </div>
+                    <!-- Profile Buttons Start-->
+                    <div class="profile-buttons">
+                        <div class="mt-30 mb-30">
+                            <a href="#" class="btn akame-btn profile-btn active">Редагувати профіль</a>
+                        </div>
+
+                        <div class="mb-30">
+                            <a href="/favorites" class="btn akame-btn profile-btn active">Обрані школи</a>
+                        </div>
+
+                        <!-- Organizator buttons Start-->
+                        <div class="mb-30">
+                            <a href="#" class="btn akame-btn profile-btn active">Додати школу</a>
+                        </div>
+
+                        <div class="mb-30">
+                            <a href="/" class="btn akame-btn profile-btn active">Редагувати школу</a>
+                        </div>
+                        <!-- Organizator buttons End-->
+                    </div>
+                    <!-- Profile Buttons End-->
+
+                </div>
+            </div>
+            <!-- Фильтри/Критерії End -->
+
+            <div class="col-lg-9">
+                <!-- Результати вибору шкіл -->
+
+                <div class="single-service-area mb-30 wow fadeInUp school-results"
+                     data-wow-delay="200ms">
+
+                    <div class="school-container">
+                        <div class="profile-text profile-desc">
+                            <h4 class="school-detail">Ім'я: @Model.FirstName Nataliia</h4>
+                            <h4 class="school-detail">Прізвище: @Model.LastName Kovalchuk </h6>
+                            <h4 class="school-detail">Пошта: @Model.Email</h4>
+                        </div>
+                        <div>
+                            <img src="~/img/core-img/family.png" alt="" width="256px">
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </div>
+    </div>
+</section>
+<!-- School Selection Area End -->

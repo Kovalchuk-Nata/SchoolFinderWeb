@@ -65,10 +65,11 @@ namespace SchoolFinderWeb.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-
+            [Required]
             [Display(Name = "FirstName")]
             public string FirstName { get; set; }
 
+            [Required]
             [Display(Name = "LastName")]
             public string LastName { get; set; }
 

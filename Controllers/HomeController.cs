@@ -86,6 +86,7 @@ namespace SchoolFinderWeb.Controllers
             return View(viewModel);
         }
 
+       
         [Route("/articles")]
         public IActionResult Articles()
         {
@@ -93,6 +94,7 @@ namespace SchoolFinderWeb.Controllers
             return View(articles);
         }
 
+        
         [Route("/articles/{id}")]
         public IActionResult ArticleView(int id)
         {
@@ -104,6 +106,7 @@ namespace SchoolFinderWeb.Controllers
             return View(article);
         }
 
+        
         [Route("/findschool/{id}")]
         public IActionResult FindSchoolView(int id)
         {

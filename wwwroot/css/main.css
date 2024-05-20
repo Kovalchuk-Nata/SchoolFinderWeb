@@ -90,3 +90,20 @@
 }
 
 
+.profile-buttons {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.profile-btn {
+    text-wrap: nowrap;
+}
+
+
+.profile-text {
+    text-align: left;
+}
+
+
+
