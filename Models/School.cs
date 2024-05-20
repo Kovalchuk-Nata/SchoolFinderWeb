@@ -41,6 +41,7 @@ namespace SchoolFinderWeb.Models
         //public bool isFavorite { get; set; }
         public bool isConfirmed { get; set; }
 
+
     }
 }
         /*

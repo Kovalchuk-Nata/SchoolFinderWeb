@@ -1,0 +1,88 @@
+﻿@model List<FavoriteSchool>
+@{
+    ViewData["Title"] = "Favorites";
+}
+
+<!-- Breadcrumb Area Start -->
+<section class="breadcrumb-area section-padding-80 bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-content">
+                    <h2>Обрати школу</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/">
+                                    <i class="icon_house_alt"></i>
+                                    Головна
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Обране</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Area End -->
+<!-- School Selection Area Start -->
+<section class="akame-portfolio section-padding-80 clearfix">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-9">
+                <!-- Результати вибору шкіл -->
+                <div class="">
+                    @if(Model.Count > 0) {
+                        foreach (var favorite in Model)
+                        {
+                            <div class="single-service-area mb-30 wow fadeInUp school-results"
+                             data-wow-delay="200ms">
+                                <div class="">
+                                    <img src="img/core-img/education.png" alt="" width="128px">
+                                </div>
+                                <div class="col school-text-name">
+                                    <a href="/findschool/@favorite.School.SchoolID" class="">
+                                        <h4>Школа #1 ID: @favorite.School.Name</h4>
+                                        <p>
+                                            @favorite.School.Type школа, Ціна: від ₴@favorite.School.Price, Район: @favorite.School.District
+                                        </p>
+                                    </a>
+                                </div>
+                                <div class="heart-icon ml-5 mt-4 mt-lg-0">
+                                    <a href="#"><i class="icon_heart" onclick="delFromFavorites(@favorite.School.SchoolID)"></i></a>
+                                </div>
+
+                            </div>
+                        }
+                    } else
+                    {
+                        <h5>У вибраному немає шкіл</h5>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- School Selection Area End -->
+
+<script>
+    function delFromFavorites(SchoolID) {
+        fetch('/Ajax/DelFromFavorites', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ SchoolID: SchoolID })
+        }).then(response => {
+            if (response.ok) {
+                window.location.reload();
+            } else {
+                alert('Помилка при видаленні.');
+            }
+        });
+    }
+</script>

@@ -16,5 +16,8 @@ namespace SchoolFinderWeb.Models
 
         public UserTypes UserType { get; set; }
 
+        // Зв'язок з обраними школами
+        public List<FavoriteSchool>? FavoriteSchools { get; set; }
+
     }
 }

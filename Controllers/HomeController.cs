@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SchoolFinderWeb.Data;
 using SchoolFinderWeb.Models;
 using SchoolFinderWeb.ViewModels;
@@ -11,11 +13,13 @@ namespace SchoolFinderWeb.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext schoolDB;
+        private readonly UserManager<User> userManager;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext schoolDB)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext schoolDB, UserManager<User> userManager)
         {
             _logger = logger;
             this.schoolDB = schoolDB;
+            this.userManager = userManager;
         }
 
 
@@ -120,18 +124,18 @@ namespace SchoolFinderWeb.Controllers
             return View();
         }
 
-        /*
+
         [Route("/favorites")]
         public IActionResult Favorites()
         {
-            //var userId = userManager.GetUserId(User);
-            var userId = 1;
+            var userId = userManager.GetUserId(User);
+            //var userId = 1;
 
             var favorites = schoolDB.FavoriteSchools.Include(f => f.School).Where(f => f.UserID == userId).ToList();
 
             return View(favorites);
         }
-        */
+
         public IActionResult Privacy()
         {
             return View();

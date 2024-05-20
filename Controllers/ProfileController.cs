@@ -5,7 +5,7 @@ using SchoolFinderWeb.Models;
 
 namespace SchoolFinderWeb.Controllers
 {
-    [Authorize(Roles = "Parent")]
+    [Authorize]
     public class ProfileController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;
