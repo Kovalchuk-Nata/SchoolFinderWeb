@@ -13,37 +13,35 @@
             <div class="col">
                 <div class="login-form ">
                     <h2>Вхід</h2>
-                    <form id="account" method="post" class="login-form">
-                        <h2>Use a local account to log in.</h2>
+                    <form id="account" method="post">
                         <hr />
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-floating form-group">
-                            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
-                            <label asp-for="Input.Email" class="form-label"></label>
+                            <label asp-for="Input.Email" class="form-label">Пошта</label>
+                            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="Введіть пошту"/>
                             <span asp-validation-for="Input.Email" class="text-danger"></span>
                         </div>
                         <div class="form-floating form-group">
-                            <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
-                            <label asp-for="Input.Password" class="form-label"></label>
+                            <label asp-for="Input.Password" class="form-label">Пароль</label>
+                            <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Введіть пароль" />
                             <span asp-validation-for="Input.Password" class="text-danger"></span>
                         </div>
-                        <div>
+                        @*<div>
                             <div class="checkbox form-group">
                                 <label asp-for="Input.RememberMe" class="form-label">
                                     <input class="form-check-input" asp-for="Input.RememberMe" />
                                     @Html.DisplayNameFor(m => m.Input.RememberMe)
                                 </label>
                             </div>
+                        </div>*@
+                        <!-- Additional Message -->
+                        <p class="text-center mt-3">
+                            Ще не зареєстровані? <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Давайте створимо профіль!</a>
+                        </p>
+                        <div class="btn-centre">
+                            <button id="login-submit" type="submit" class="btn akame-btn active">Увійти</button>
                         </div>
-                        <div>
-                            <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
-                        </div>
-                        <div>
-                            <p>
-                                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                            </p>
-                        </div>
-                    </form>
+                               </form>
                 </div>
             </div>
         </div>

@@ -117,7 +117,7 @@ namespace SchoolFinderWeb.Controllers
 
 
 
-        [Authorize(Roles = "Parent")]
+        //[Authorize(Roles = "Parent")]
         [Route("/contacts")]
         public IActionResult Contacts()
         {
