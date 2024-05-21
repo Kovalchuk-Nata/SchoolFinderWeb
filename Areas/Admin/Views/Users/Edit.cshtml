@@ -1,4 +1,4 @@
-﻿@model User
+﻿@model SchoolFinderWeb.Areas.Admin.ViewModel.EditUserViewModel
 @{
     ViewData["Title"] = "Edit user";
 }
@@ -9,7 +9,23 @@
 
         <div asp-validation-summary="All"></div>
 
-        <partial name="_form" />
+        <input asp-for="Id" class="form-control" type="hidden"/>
+
+        <div class="border p-3 mt-4">
+            <div class="mb-3">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserType" class="label-form">Choose user type:</label>
+                <select asp-for="UserType" asp-items="Html.GetEnumSelectList<UserTypes>()" class="form-control label-form"></select>
+            </div>
 
         <button type="submit" class="btn btn-primary" style="width:150px">Edit</button>
     </div>
