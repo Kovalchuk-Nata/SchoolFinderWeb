@@ -29,8 +29,9 @@ namespace SchoolFinderWeb.Models
         public bool ExtendedDayGroups { get; set; } // група продовженного дня
 
         [Display(Name = "Спеціалізація")]
-        public bool Specialization { get; set; } 
+        public bool Specialization { get; set; }
 
+        [Display(Name = "Додаткові освітні можливості")]
         public bool AdditionalOpportunities { get; set; }
 
         [Required]
@@ -38,8 +39,10 @@ namespace SchoolFinderWeb.Models
         public string Description { get; set; }
 
         [Display(Name = "Підтверджено")]
-        //public bool isFavorite { get; set; }
         public bool isConfirmed { get; set; }
+
+        [Display(Name = "Користувач, що додав школу")]
+        public string UserId { get; set; }
 
 
     }
