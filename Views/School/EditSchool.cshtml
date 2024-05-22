@@ -1,14 +1,45 @@
 ﻿@model SchoolFinderWeb.Models.School
 
 @{
-    ViewData["Title"] = "Додати школу";
+    ViewData["Title"] = "Редагувати школу";
 }
 
-<form method="post" asp-controller="school" asp-action="AddSchool"> 
+<!-- Breadcrumb Area Start -->
+<section class="breadcrumb-area section-padding-80 bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-content">
+                    <h2>Редагувати школу</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/">
+                                    <i class="icon_house_alt"></i>
+                                    Головна
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="/profile">
+                                    <i class=""></i>
+                                    Профіль
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Редагувати школу</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Area End -->
+
+<form method="post" asp-controller="School" asp-action="Edit">
     <div class="border p-3 mt-4">
 
         <div asp-validation-summary="All" class="text-danger"></div>
-
+        <input asp-for="SchoolID" class="form-control" type="hidden" />
         <div class="mb-3">
             <label asp-for="Name"></label>
             <input asp-for="Name" class="form-control" />
@@ -60,8 +91,13 @@
             <textarea asp-for="Description" class="form-control" rows="4"></textarea>
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
+        <input asp-for="UserId" class="form-control" type="hidden" />
 
         <button type="submit" class="btn akame-btn" style="width:150px">Create</button>
     </div>
 
 </form>
+
+@section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+        }

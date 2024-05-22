@@ -1,0 +1,127 @@
+﻿@model SchoolFinderWeb.Models.School
+
+@{
+    ViewData["Title"] = "Профіль школи";
+}
+
+<!-- Breadcrumb Area Start -->
+<section class="breadcrumb-area section-padding-80 bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-content">
+                    <h2>Профіль школи</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/">
+                                    <i class="icon_house_alt"></i>
+                                    Головна
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="/profile">
+                                    <i class=""></i>
+                                    Профіль
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Профіль школи</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Area End -->
+
+
+<section class="akame-portfolio section-padding-80 clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="p-3 mt-4">
+                <div class="profile-container">
+
+                    <div class="profile-text profile-desc school-details">
+                        <h3 class="school-detail"> @Model.Name </h4>
+                        <h4 class="school-detail">Адреса: @Model.Address</h4>
+                        <h4 class="school-detail">Район: @Model.District</h4>
+                        <h4 class="school-detail">Тип: @Model.Type</h4>
+                        <h4 class="school-detail">Ціна навчання: @Model.Price</h4>
+                        <h4 class="school-detail">Наявність групи продовженного дня: @Model.ExtendedDayGroups</h4>
+                        <h4 class="school-detail">Поглиблений напрям навчання (гуманітарний, математичний тощо): @Model.Specialization</h4>
+                        <h4 class="school-detail">Додаткові освітні можливості: @Model.AdditionalOpportunities</h4>
+                        <h4 class="school-detail">Опис: </h4>
+                        <p>@Model.Description</p>
+                        <h4 class="school-detail">Підтверджено: @Model.isConfirmed</h4>
+                    </div>
+                    <div>
+                        <img src="~/img/core-img/school.png" alt="" width="256px">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!--
+
+ <div class="border p-3 mt-4">
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="mb-3">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" readonly/>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Address"></label>
+        <input asp-for="Address" class="form-control" readonly />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="District"></label>
+        <input asp-for"District" class="form-control" readonly />
+        <select asp-for="District" class="form-control" readonly/>
+            <span asp-validation-for="District" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Type"></label>
+            <select asp-for="Type" class="form-control">
+                <option value="Державна">Державна</option>
+                <option value="Приватна">Приватна</option>
+            </select>
+            <span asp-validation-for="Type" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Price"></label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="ExtendedDayGroups"></label>
+            <input asp-for="ExtendedDayGroups" type="checkbox" />
+            <span asp-validation-for="ExtendedDayGroups" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Specialization"></label>
+            <input asp-for="Specialization" type="checkbox" />
+            <span asp-validation-for="Specialization" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="AdditionalOpportunities"></label>
+            <input asp-for="AdditionalOpportunities" type="checkbox" />
+            <span asp-validation-for="AdditionalOpportunities" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+    </div>
+-->

@@ -46,6 +46,7 @@
     align-items: center;
 }
 
+/* Кнопка по центру */
 .btn-centre {
     display: flex;
     justify-content: center;
@@ -116,5 +117,10 @@
 
 .text-center {
     text-align: center;
+}
+
+
+.user-edit-center {
+    justify-content: center;
 }
 

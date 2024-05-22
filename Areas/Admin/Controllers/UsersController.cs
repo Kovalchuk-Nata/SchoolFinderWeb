@@ -117,20 +117,6 @@ namespace SchoolFinderWeb.Areas.Admin.Controllers
             return View(obj);
         }
 
-        ////POST
-        //[HttpPost]
-        //[AutoValidateAntiforgeryToken]
-        //public IActionResult Create(User obj)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        schoolDB.Users.Add(obj);
-        //        schoolDB.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(obj);
-        //}
-
         
         //TODO сделать правильную работу в редактировании юзера в поле пароль
         //GET

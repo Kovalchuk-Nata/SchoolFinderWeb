@@ -4,7 +4,7 @@
 }
 
 
-<form method="post" asp-action="Edit">
+<form method="post" asp-action="EditUser">
     <div cclass="border p-3 mt-4">
 
         <div asp-validation-summary="All"></div>
@@ -31,3 +31,7 @@
     </div>
 
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+        }

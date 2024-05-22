@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SchoolFinderWeb.Areas.Admin.ViewModel;
 using SchoolFinderWeb.Data;
 using SchoolFinderWeb.Models;
 
@@ -34,6 +35,58 @@ namespace SchoolFinderWeb.Controllers
             }
 
             return View(user); // Передача користувача до подання
+        }
+
+        //GET
+        [Route("/editUser")]
+        public IActionResult EditUser()
+        {
+
+            var id = _userManager.GetUserId(User);
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var userId = schoolDB.Users.FirstOrDefault(c => c.Id == id);
+
+            if (userId == null)
+            {
+                return NotFound();
+            }
+
+            var userView = new EditUserViewModel
+            {
+                Id = userId.Id,
+                UserType = userId.UserType,
+                FirstName = userId.FirstName,
+                LastName = userId.LastName
+            };
+
+
+            return View(userView);
+        }
+
+        //POST
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public IActionResult Edit(EditUserViewModel obj)
+        {
+
+            var user = schoolDB.Users.FirstOrDefault(c => c.Id == obj.Id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            user.FirstName = obj.FirstName;
+            user.LastName = obj.LastName;
+            user.UserType = obj.UserType;
+            schoolDB.Users.Update(user);
+            schoolDB.SaveChanges();
+
+            return RedirectToAction("Profile");
         }
 
 

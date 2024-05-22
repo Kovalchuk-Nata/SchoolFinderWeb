@@ -1,5 +1,68 @@
-﻿@model SchoolFinderWeb.Models.User
+﻿@model SchoolFinderWeb.Areas.Admin.ViewModel.EditUserViewModel
 
 @{
     ViewData["Title"] = "Редагувати";
 }
+
+<!-- Breadcrumb Area Start -->
+<section class="breadcrumb-area section-padding-80">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-content">
+                    <h2>Редагувати профіль</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/">
+                                    <i class="icon_house_alt"></i>
+                                    Головна
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="/profile">
+                                    <i class=""></i>
+                                    Профіль
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Редагувати профіль</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Area End -->
+
+<!-- School Selection Area Start -->
+<section class="akame-portfolio section-padding-40 clearfix">
+    <div class="container">
+        <div class="row user-edit-center">
+            <!-- Кнопки сбоку Start -->
+            <div class="col-lg-3">
+                <form method="post" asp-action="Edit">
+                    <div class="">
+
+                        <div asp-validation-summary="All"></div>
+                        <input asp-for="Id" class="form-control" type="hidden" />
+                        <div class=" p-3 mt-4">
+                            <div class="mb-3">
+                                <h4>Ім'я</h4>
+                                <input asp-for="FirstName" class="form-control" />
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <h4>Прізвище</h4>
+                                <input asp-for="LastName" class="form-control" />
+                                <span asp-validation-for="LastName"></span>
+                            </div>
+                            <div class="btn-centre mt-4">
+                                <button type="submit" class="akame-btn btn-centre active" style="width:150px">Редагувати</button>
+                            </div>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,27 +1,60 @@
-﻿@model SchoolFinderWeb.Models.School
+﻿@model SchoolFinderWeb.ViewModels.SchoolViewModel
 
 @{
     ViewData["Title"] = "Додати школу";
 }
+<!-- Breadcrumb Area Start -->
+<section class="breadcrumb-area section-padding-80 bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-content">
+                    <h2>Додати школу</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/">
+                                    <i class="icon_house_alt"></i>
+                                    Головна
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="/profile">
+                                    <i class=""></i>
+                                    Профіль
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Додати школу</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Area End -->
 
+<form method="post" asp-controller="School" asp-action="Create">
     <div class="border p-3 mt-4">
 
         <div asp-validation-summary="All" class="text-danger"></div>
 
         <div class="mb-3">
             <label asp-for="Name"></label>
-            <input asp-for="Name" class="form-control" readonly/>
+            <input asp-for="Name" class="form-control" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for="Address"></label>
-        <input asp-for="Address" class="form-control" readonly />
+            <input asp-for="Address" class="form-control" />
             <span asp-validation-for="Address" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for="District"></label>
-        <input asp-for"District" class="form-control" readonly />
-        <select asp-for="District" class="form-control" readonly/>
+            <select asp-for="District" class="form-control">
+                <option value="Богунський">Богунський</option>
+                <option value="Корольовський">Корольовський</option>
+            </select>
             <span asp-validation-for="District" class="text-danger"></span>
         </div>
         <div class="mb-3">
@@ -57,6 +90,12 @@
             <textarea asp-for="Description" class="form-control" rows="4"></textarea>
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
-
+        <div class="btn-centre">
+            <button type="submit" class="btn akame-btn" style="width:150px">Create</button>
+        </div>
     </div>
+</form>
 
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+        }
