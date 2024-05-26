@@ -112,7 +112,7 @@ namespace SchoolFinderWeb.Controllers
                 obj.isConfirmed = false;
                 schoolDB.School.Update(obj);
                 schoolDB.SaveChanges(true);
-                return RedirectToAction("Index");
+                return RedirectToAction("SchoolProfile");
             }
             return View(obj);
         }

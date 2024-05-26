@@ -94,12 +94,12 @@
                             <label class="filter-label"><input type="checkbox"> Державна</label>
                             <label class="filter-label"><input type="checkbox"> Приватна</label>
                         </div>*@
-                        <div class="filter-widget">
+                        @*<div class="filter-widget">
                             <h4>??? Формат навчання ???</h4>
                             <label class="filter-label"><input type="checkbox"> Офлайн</label>
                             <label class="filter-label"><input type="checkbox"> Дистанційне</label>
                             <label class="filter-label"><input type="checkbox"> Онлайн</label>
-                        </div>
+                        </div>*@
                         @*<div class="filter-widget">
                             <h4>Ціна навчання</h4>
                             <label class="filter-label"><input class="form-control" type="input"></label>
@@ -150,8 +150,19 @@
                                         </p>
                                     </a>
                                 </div>
-                                <div class="heart-icon ml-5 mt-4 mt-lg-0">
-                                    <a href="#"><i class="icon_heart" onclick="addToFavorites(event, this, @school.SchoolID)"></i></a>
+                                
+                                <div class="favotites-btn">
+                                    <!-- Кнопка для добавления в избранное -->
+                                    <div class="heart-icon ml-5 mt-4 mt-lg-0">
+                                        <a href="#"><i class="icon_heart" onclick="addToFavorites(event, this, @school.SchoolID)"></i></a>
+                                    </div>
+
+                                    <!-- Кнопка для добавления в сравнение -->
+                                    <div>
+                                        <a href="#" onclick="addToCompare(event, this, @school.SchoolID)" class="btn akame-btn active">
+                                            <i class="icon_plus"></i> Додати в порівняння
+                                        </a>
+                                    </div>
                                 </div>
 
                             </div>
@@ -175,6 +186,25 @@
         event.preventDefault();
 
         fetch('/Ajax/AddFavorites', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ SchoolID: SchoolID })
+        }).then(response => {
+            if (response.ok) {
+                element.style.color = '#4F9269';
+            } else {
+                alert('Помилка при додаванні у вибране.');
+            }
+        });
+    }
+
+    function addToCompare(event, element, SchoolID) {
+
+        event.preventDefault();
+
+        fetch('/Ajax/AddCompare', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

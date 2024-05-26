@@ -124,3 +124,25 @@
     justify-content: center;
 }
 
+.favotites-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.results-compare {
+    display: flex;
+}
+
+.results-compare-item {
+    flex-direction: column;
+    align-items: center;
+}
+
+.compare-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+

@@ -71,5 +71,53 @@ namespace SF.Controllers
 
         }
 
+        // COMPARISON
+        [HttpPost]
+        public async Task<IActionResult> AddCompare([FromBody] FavoriteViewModel model)
+        {
+
+            var userId = userManager.GetUserId(User);
+
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
+            var compareItem = new Compare
+            {
+                UserID = userId,
+                SchoolID = model.SchoolID
+            };
+
+            schoolDB.Compare.Add(compareItem);
+            await schoolDB.SaveChangesAsync();
+
+            return Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DelFromCompare([FromBody] FavoriteViewModel model)
+        {
+
+            var userId = userManager.GetUserId(User);
+
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
+            var compareItem = schoolDB.Compare.FirstOrDefault(f => f.UserID == userId && f.SchoolID == model.SchoolID);
+
+            if (compareItem != null)
+            {
+                schoolDB.Compare.Remove(compareItem);
+                await schoolDB.SaveChangesAsync();
+
+                return Ok();
+            }
+
+            return StatusCode(500);
+        }
+
     }
 }

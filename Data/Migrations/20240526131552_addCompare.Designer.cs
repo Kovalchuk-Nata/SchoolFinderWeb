@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchoolFinderWeb.Data;
 
@@ -11,9 +12,10 @@ using SchoolFinderWeb.Data;
 namespace SchoolFinderWeb.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240526131552_addCompare")]
+    partial class addCompare
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -185,30 +187,6 @@ namespace SchoolFinderWeb.Data.Migrations
                     b.HasKey("ArticleID");
 
                     b.ToTable("Article");
-                });
-
-            modelBuilder.Entity("SchoolFinderWeb.Models.Compare", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("SchoolID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SchoolID");
-
-                    b.HasIndex("UserID");
-
-                    b.ToTable("Compare");
                 });
 
             modelBuilder.Entity("SchoolFinderWeb.Models.FavoriteSchool", b =>
@@ -412,25 +390,6 @@ namespace SchoolFinderWeb.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("SchoolFinderWeb.Models.Compare", b =>
-                {
-                    b.HasOne("SchoolFinderWeb.Models.School", "School")
-                        .WithMany()
-                        .HasForeignKey("SchoolID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SchoolFinderWeb.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("School");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("SchoolFinderWeb.Models.FavoriteSchool", b =>

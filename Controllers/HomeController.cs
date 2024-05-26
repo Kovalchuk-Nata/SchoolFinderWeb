@@ -139,6 +139,17 @@ namespace SchoolFinderWeb.Controllers
             return View(favorites);
         }
 
+        [Route("/compare")]
+        public IActionResult Compare()
+        {
+            var userId = userManager.GetUserId(User);
+            //var userId = 1;
+
+            var favorites = schoolDB.Compare.Include(f => f.School).Where(f => f.UserID == userId).ToList();
+
+            return View(favorites);
+        }
+
         public IActionResult Privacy()
         {
             return View();

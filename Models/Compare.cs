@@ -1,9 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SchoolFinderWeb.Models
 {
-    public class FavoriteSchool
+    public class Compare
     {
         [Key]
         public int Id { get; set; }
