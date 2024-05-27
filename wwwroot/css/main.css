@@ -146,3 +146,7 @@
     align-items: center;
 }
 
+.likes {
+    display: flex;
+    justify-content: end;
+}

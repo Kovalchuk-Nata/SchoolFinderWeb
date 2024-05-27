@@ -1,28 +1,42 @@
-﻿@using SchoolFinderWeb.Models
-@model School
+﻿@model SchoolFinderWeb.ViewModels.SchoolProfileViewModel
+
 @{
     ViewData["Title"] = "School";
 }
 
-<!-- Breadcrumb Area Start -->
+<!-- School Area Start -->
 <section class="breadcrumb-area section-padding-80">
     <div class="container">
         <div class="col-12">
-            <h2 class="mb-30 school-title">@Model.Name</h2>
+            <h2 class="mb-30 school-title">@Model.School.Name</h2>
         </div>
-        <div class="school-container">
+        <div class="school-container border p-4 mb-4">
             <div class="school-details">
-                <p class="school-detail">Адреса: @Model.Address</p>
-                <p class="school-detail">Район: @Model.District</p>
-                <p class="school-detail">Тип школи: @Model.Type</p>
-                <p class="school-detail">Ціна: @Model.Price грн</p>
-                <p class="school-detail">Группа продовженного дня: @Model.ExtendedDayGroups</p>
+                <p class="school-detail">Адреса: @Model.School.Address</p>
+                <p class="school-detail">Район: @Model.School.District</p>
+                <p class="school-detail">Тип школи: @Model.School.Type</p>
+                <p class="school-detail">Ціна: @Model.School.Price грн</p>
+                <p class="school-detail">Группа продовженного дня: @Model.School.ExtendedDayGroups</p>
 
-                <p class="article-details">@Model.Description</p>
+                <p class="article-details">@Model.School.Description</p>
             </div>
             <div>
                 <img src="~/img/core-img/school.png" alt="" width="256px">
             </div>
+        </div>
+        <!--  -->
+        <div class="likes">
+            <!-- Кнопка для like -->
+            <div class="heart-icon ml-5 mt-4 mt-lg-0">
+                <a href="#"><i class="icon_like_alt" onclick="addReaction(event, this, @Model.School.SchoolID, true)"></i></a>
+                <p id="likes-count">Лайки: @Model.LikesCount</p>
+            </div>
+            <!-- Кнопка для dislike -->
+            <div class="heart-icon ml-5 mt-4 mt-lg-0">
+                <a href="#"><i class="icon_dislike_alt" onclick="addReaction(event, this, @Model.School.SchoolID, false)"></i></a>
+                <p id="dislikes-count">Дизлайки: @Model.DislikesCount</p>
+            </div>
+            
         </div>
         <!-- Google Maps Start -->
         <div class="akame-google-maps-area mt-5">
@@ -31,3 +45,30 @@
     </div>
 </section>
 <!-- Breadcrumb Area End -->
+
+<script>
+    function addReaction(event, element, SchoolID, isLike) {
+        event.preventDefault();
+
+        fetch('/Ajax/AddReaction', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ SchoolID: SchoolID, IsLike: isLike })
+        }).then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Помилка при додаванні реакції. Cпочатку зареєструйтеся.');
+            }
+        }).then(data => {
+            console.log(data); // Логируем данные для отладки
+            element.style.color = isLike ? '#4F9269' : '#FF0000'; // змінити колір залежно від реакції
+            document.querySelector('#likes-count').textContent = `Лайки: ${data.likesCount}`;
+            document.querySelector('#dislikes-count').textContent = `Дизлайки: ${data.dislikesCount}`;
+        }).catch(error => {
+            alert(error.message);
+        });
+    }
+</script>

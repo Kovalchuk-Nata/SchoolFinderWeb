@@ -115,12 +115,30 @@ namespace SchoolFinderWeb.Controllers
             {
                 return NotFound();
             }
-            return View(_school);
+
+            var likesCount = GetLikesCount(id);
+            var dislikesCount = GetDislikesCount(id);
+
+            var viewModel = new SchoolProfileViewModel
+            {
+                School = _school,
+                LikesCount = likesCount,
+                DislikesCount = dislikesCount
+            };
+
+            return View(viewModel);
         }
 
+        public int GetLikesCount(int schoolId)
+        {
+            return schoolDB.Likes.Count(l => l.SchoolID == schoolId && l.IsLike);
+        }
 
+        public int GetDislikesCount(int schoolId)
+        {
+            return schoolDB.Likes.Count(l => l.SchoolID == schoolId && !l.IsLike);
+        }
 
-        //[Authorize(Roles = "Parent")]
         [Route("/contacts")]
         public IActionResult Contacts()
         {
@@ -143,7 +161,6 @@ namespace SchoolFinderWeb.Controllers
         public IActionResult Compare()
         {
             var userId = userManager.GetUserId(User);
-            //var userId = 1;
 
             var favorites = schoolDB.Compare.Include(f => f.School).Where(f => f.UserID == userId).ToList();
 

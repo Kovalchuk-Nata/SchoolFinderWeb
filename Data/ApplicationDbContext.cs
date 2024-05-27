@@ -13,6 +13,7 @@ namespace SchoolFinderWeb.Data
         public DbSet<Article> Article { get; set; }
         public DbSet<FavoriteSchool> FavoriteSchools { get; set; }
         public DbSet<Compare> Compare { get; set; }
+        public DbSet<Likes> Likes { get; set; }
 
     }
 }

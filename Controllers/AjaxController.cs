@@ -119,5 +119,40 @@ namespace SF.Controllers
             return StatusCode(500);
         }
 
+        // ADD LIKES AND DISLIKES
+        [HttpPost]
+        public async Task<IActionResult> AddReaction([FromBody] Likes model)
+        {
+            var userId = userManager.GetUserId(User);
+
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
+            var like = schoolDB.Likes.FirstOrDefault(l => l.UserID == userId && l.SchoolID == model.SchoolID);
+            if (like == null)
+            {
+                like = new Likes
+                {
+                    UserID = userId,
+                    SchoolID = model.SchoolID,
+                    IsLike = model.IsLike
+                };
+                schoolDB.Likes.Add(like);
+            }
+            else
+            {
+                like.IsLike = model.IsLike;
+                schoolDB.Likes.Update(like);
+            }
+
+            await schoolDB.SaveChangesAsync();
+
+            var likesCount = schoolDB.Likes.Count(l => l.SchoolID == model.SchoolID && l.IsLike);
+            var dislikesCount = schoolDB.Likes.Count(l => l.SchoolID == model.SchoolID && !l.IsLike);
+
+            return Ok(new { LikesCount = likesCount, DislikesCount = dislikesCount });
+        }
     }
 }
