@@ -14,6 +14,7 @@ namespace SchoolFinderWeb.Data
         public DbSet<FavoriteSchool> FavoriteSchools { get; set; }
         public DbSet<Compare> Compare { get; set; }
         public DbSet<Likes> Likes { get; set; }
+        public DbSet<VUO> VUO { get; set; }
 
     }
 }

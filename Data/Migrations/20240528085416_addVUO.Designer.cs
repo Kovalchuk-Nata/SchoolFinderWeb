@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchoolFinderWeb.Data;
 
@@ -11,9 +12,10 @@ using SchoolFinderWeb.Data;
 namespace SchoolFinderWeb.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240528085416_addVUO")]
+    partial class addVUO
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -407,7 +409,7 @@ namespace SchoolFinderWeb.Data.Migrations
                     b.Property<int>("OlimpiadYear")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SchoolId")
+                    b.Property<int?>("SchoolID")
                         .HasColumnType("int");
 
                     b.Property<string>("SchoolName")
@@ -424,7 +426,7 @@ namespace SchoolFinderWeb.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SchoolId");
+                    b.HasIndex("SchoolID");
 
                     b.ToTable("VUO");
                 });
@@ -541,7 +543,7 @@ namespace SchoolFinderWeb.Data.Migrations
                 {
                     b.HasOne("SchoolFinderWeb.Models.School", "School")
                         .WithMany()
-                        .HasForeignKey("SchoolId");
+                        .HasForeignKey("SchoolID");
 
                     b.Navigation("School");
                 });

@@ -1,0 +1,34 @@
+﻿@using NonFactors.Mvc.Grid;
+@using SchoolFinderWeb.Models
+@model IQueryable<VUO>
+
+@{
+    ViewBag.Title = "Olimpiad";
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-sm btn-info">Create</a>
+</p>
+
+@(Html
+    .Grid(Model)
+    .Build(columns =>
+    {
+        columns.Add(model => model.Id).Titled("Id");
+        columns.Add(model => model.Student).Titled("ПІБ учня");
+        columns.Add(model => model.SchoolName).Titled("Назва школи");
+        columns.Add(model => model.OlimpiadYear).Titled("Рік олімпіади");
+        columns.Add(model => model.Subject).Titled("Предмет");
+        columns.Add(model => model.Class).Titled("Клас");
+
+        columns.Add(model => $"<a class=\"btn btn-sm btn-primary\" href=\"Olimpiad\\Edit\\{model.Id}\">Edit</a>  " +
+            $"<a class=\"btn btn-sm btn-danger\" href=\"Olimpiad\\Delete\\{model.Id}\">Delete</a>"
+            ).Encoded(false);
+
+    })
+    .Using(GridFilterMode.Row)
+    .Empty("")
+    .Filterable()
+    .Sortable()
+    .Pageable()
+)
