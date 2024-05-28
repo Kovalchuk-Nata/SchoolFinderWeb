@@ -150,3 +150,8 @@
     display: flex;
     justify-content: end;
 }
+
+.school-chart {
+    max-width: 450px;
+}
+

@@ -4,6 +4,8 @@
     ViewData["Title"] = "School";
 }
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+
 <!-- School Area Start -->
 <section class="breadcrumb-area section-padding-80">
     <div class="container">
@@ -36,8 +38,104 @@
                 <a href="#"><i class="icon_dislike_alt" onclick="addReaction(event, this, @Model.School.SchoolID, false)"></i></a>
                 <p id="dislikes-count">Дизлайки: @Model.DislikesCount</p>
             </div>
-            
+
         </div>
+
+        <!-- Diagram and Statistic Area Start -->
+        @if (Model.OlympiadDataByYear != null && Model.OlympiadDataByYear.Any())
+        {
+            <div class="my-charts">
+                <div class="school-chart">
+                    <canvas id="myChart" width="600" height="400"></canvas>
+                    <script>
+                        var years = @Html.Raw(Json.Serialize(Model.OlympiadDataByYear.Select(d => d.Year).ToArray()));
+                        var counts = @Html.Raw(Json.Serialize(Model.OlympiadDataByYear.Select(d => d.Count).ToArray()));
+
+                        var ctx = document.getElementById('myChart').getContext('2d');
+                        var myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: years,
+                                datasets: [{
+                                    label: 'Кількість олімпіадників по роках',
+                                    data: counts,
+                                    backgroundColor: getRandomColorArray(8),
+                                    borderColor: 'rgba(0, 0, 0, 1)',
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+
+
+                        function getRandomColorArray(length) {
+                            var colors = [];
+                            for (var i = 0; i < length; i++) {
+                                var color = 'rgba(' + getRandomNumber(0, 255) + ',' + getRandomNumber(0, 255) + ',' + getRandomNumber(0, 255) + ', 0.7)';
+                                colors.push(color);
+                            }
+                            return colors;
+                        }
+
+                        function getRandomNumber(min, max) {
+                            return Math.floor(Math.random() * (max - min + 1)) + min;
+                        }
+
+                        // Первоначальное обновление диаграммы при загрузке страницы
+                        updateChart();
+
+                    </script>
+                </div>
+
+                <!-- Вторая диаграмма по количеству олимпиадников по предметам за года -->
+                <div class="school-chart">
+                    <canvas id="myChartBySubject" width="600" height="400"></canvas>
+                    <script>
+                        var subjects = @Html.Raw(Json.Serialize(Model.OlympiadDataBySubject.Select(d => d.Subject).ToArray()));
+                        var subjectDataByYear = @Html.Raw(Json.Serialize(Model.OlympiadDataBySubject.GroupBy(d => d.Year).ToDictionary(
+                        group => group.Key,
+                        group => group.Select(g => g.Count).ToArray()
+                        )));
+
+                        var ctxBySubject = document.getElementById('myChartBySubject').getContext('2d');
+                        var myChartBySubject = new Chart(ctxBySubject, {
+                            type: 'bar',
+                            data: {
+                                labels: subjects,
+                                datasets: Object.keys(subjectDataByYear).map(function (year) {
+                                    return {
+                                        label: year,
+                                        data: subjectDataByYear[year],
+                                        backgroundColor: getRandomColorArray(subjects.length),
+                                        borderColor: 'rgba(0, 0, 0, 1)',
+                                        borderWidth: 1
+                                    };
+                                })
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+
+        }
+        <!-- Diagram and Statistic Area End -->
         <!-- Google Maps Start -->
         <div class="akame-google-maps-area mt-5">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2550.433763021863!2d28.646019899999995!3d50.265159!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472c64c2a23713eb%3A0x2b4ffd416b704c12!2z0YPQuy4g0JvQtdGB0Lgg0KPQutGA0LDQuNC90LrQuCwgNywg0JbQuNGC0L7QvNC40YAsINCW0LjRgtC-0LzQuNGA0YHQutCw0Y8g0L7QsdC70LDRgdGC0YwsIDEwMDAx!5e0!3m2!1sru!2sua!4v1716546409825!5m2!1sru!2sua" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>

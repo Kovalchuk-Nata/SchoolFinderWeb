@@ -6,6 +6,8 @@ using SchoolFinderWeb.Data;
 using SchoolFinderWeb.Models;
 using SchoolFinderWeb.ViewModels;
 using System.Diagnostics;
+using System.Security.Cryptography.X509Certificates;
+using System.Web.Helpers;
 
 namespace SchoolFinderWeb.Controllers
 {
@@ -86,7 +88,7 @@ namespace SchoolFinderWeb.Controllers
             return View(viewModel);
         }
 
-       
+
         [Route("/articles")]
         public IActionResult Articles()
         {
@@ -94,7 +96,7 @@ namespace SchoolFinderWeb.Controllers
             return View(articles);
         }
 
-        
+
         [Route("/articles/{id}")]
         public IActionResult ArticleView(int id)
         {
@@ -106,7 +108,7 @@ namespace SchoolFinderWeb.Controllers
             return View(article);
         }
 
-        
+
         [Route("/findschool/{id}")]
         public IActionResult FindSchoolView(int id)
         {
@@ -119,11 +121,35 @@ namespace SchoolFinderWeb.Controllers
             var likesCount = GetLikesCount(id);
             var dislikesCount = GetDislikesCount(id);
 
+            // Збираємо дані про кількість олімпіадників за роками
+            var olympiadData = schoolDB.VUO
+                .Where(v => v.SchoolId == id)
+                .GroupBy(v => v.OlimpiadYear)
+                .Select(g => new OlympiadDataByYear
+                {
+                    Year = g.Key,
+                    Count = g.Count()
+                })
+                .ToList();
+
+            var olympiadDataBySubject = schoolDB.VUO
+                 .Where(v => v.SchoolId == id)
+                 .GroupBy(v => new { v.OlimpiadYear, v.Subject })
+                 .Select(g => new OlympiadDataBySubject
+                 {
+                     Year = g.Key.OlimpiadYear,
+                     Subject = g.Key.Subject,
+                     Count = g.Count()
+                 })
+                 .ToList();
+
             var viewModel = new SchoolProfileViewModel
             {
                 School = _school,
                 LikesCount = likesCount,
-                DislikesCount = dislikesCount
+                DislikesCount = dislikesCount,
+                OlympiadDataByYear = olympiadData,
+                OlympiadDataBySubject = olympiadDataBySubject
             };
 
             return View(viewModel);
@@ -171,7 +197,7 @@ namespace SchoolFinderWeb.Controllers
         {
             return View();
         }
-          
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
