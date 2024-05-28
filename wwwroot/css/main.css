@@ -153,5 +153,19 @@
 
 .school-chart {
     max-width: 450px;
+    margin: 20px;
 }
 
+.my-charts {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 20px;
+}
+
+.my-charts-sub {
+    display: flex;
+    flex-direction: row;
+    margin: 16px;
+}

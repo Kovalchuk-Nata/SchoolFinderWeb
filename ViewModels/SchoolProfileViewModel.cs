@@ -8,7 +8,8 @@ namespace SchoolFinderWeb.ViewModels
         public int LikesCount { get; set; }
         public int DislikesCount { get; set; }
         public List<OlympiadDataByYear> OlympiadDataByYear { get; set; }
-        public List<OlympiadDataBySubject> OlympiadDataBySubject { get; set; }
+        public List<OlympiadDataByYear> OlympiadDataByMath { get; set; }
+        public List<OlympiadDataByYear> OlympiadDataByUkr { get; set; }
     }
 
     public class OlympiadDataByYear
@@ -17,10 +18,4 @@ namespace SchoolFinderWeb.ViewModels
         public int Count { get; set; }
     }
 
-    public class OlympiadDataBySubject
-    {
-        public int Year { get; set; }
-        public string Subject { get; set; }
-        public int Count { get; set; }
-    }
 }

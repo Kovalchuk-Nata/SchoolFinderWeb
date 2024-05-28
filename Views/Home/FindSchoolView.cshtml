@@ -12,7 +12,7 @@
         <div class="col-12">
             <h2 class="mb-30 school-title">@Model.School.Name</h2>
         </div>
-        <div class="school-container border p-4 mb-4">
+        <div class="school-container p-4 mb-4">
             <div class="school-details">
                 <p class="school-detail">Адреса: @Model.School.Address</p>
                 <p class="school-detail">Район: @Model.School.District</p>
@@ -27,7 +27,7 @@
             </div>
         </div>
         <!--  -->
-        <div class="likes">
+        <div class="likes mt-4">
             <!-- Кнопка для like -->
             <div class="heart-icon ml-5 mt-4 mt-lg-0">
                 <a href="#"><i class="icon_like_alt" onclick="addReaction(event, this, @Model.School.SchoolID, true)"></i></a>
@@ -44,129 +44,179 @@
         <!-- Diagram and Statistic Area Start -->
         @if (Model.OlympiadDataByYear != null && Model.OlympiadDataByYear.Any())
         {
-            <div class="my-charts">
-                <div class="school-chart">
-                    <canvas id="myChart" width="600" height="400"></canvas>
-                    <script>
-                        var years = @Html.Raw(Json.Serialize(Model.OlympiadDataByYear.Select(d => d.Year).ToArray()));
-                        var counts = @Html.Raw(Json.Serialize(Model.OlympiadDataByYear.Select(d => d.Count).ToArray()));
+            <section class="breadcrumb-area section-padding-80">
+                <div class="container">
+                    <div class="col-12">
+                        <h2 class="mb-30 school-title">Участь школи у Всеукраїнських Олімпіадах</h2>
+                    </div>
+                    <div class="container">
+                        <div class="border-top mt-3"></div>
+                    </div>
 
-                        var ctx = document.getElementById('myChart').getContext('2d');
-                        var myChart = new Chart(ctx, {
-                            type: 'bar',
-                            data: {
-                                labels: years,
-                                datasets: [{
-                                    label: 'Кількість олімпіадників по роках',
-                                    data: counts,
-                                    backgroundColor: getRandomColorArray(8),
-                                    borderColor: 'rgba(0, 0, 0, 1)',
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                scales: {
-                                    yAxes: [{
-                                        ticks: {
-                                            beginAtZero: true
+                    <div class="my-charts">
+                        <div class="school-chart">
+                            <canvas id="myChart" width="600" height="400"></canvas>
+                            <script>
+                                var years = @Html.Raw(Json.Serialize(Model.OlympiadDataByYear.Select(d => d.Year).ToArray()));
+                                var counts = @Html.Raw(Json.Serialize(Model.OlympiadDataByYear.Select(d => d.Count).ToArray()));
+
+                                var ctx = document.getElementById('myChart').getContext('2d');
+                                var myChart = new Chart(ctx, {
+                                    type: 'bar',
+                                    data: {
+                                        labels: years,
+                                        datasets: [{
+                                            label: 'Кількість олімпіадників по роках',
+                                            data: counts,
+                                            backgroundColor: getRandomColorArray(8),
+                                            borderColor: 'rgba(0, 0, 0, 1)',
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        scales: {
+                                            yAxes: [{
+                                                ticks: {
+                                                    beginAtZero: true
+                                                }
+                                            }]
                                         }
-                                    }]
+                                    }
+                                });
+
+
+                                function getRandomColorArray(length) {
+                                    var colors = [];
+                                    for (var i = 0; i < length; i++) {
+                                        var color = 'rgba(' + getRandomNumber(0, 255) + ',' + getRandomNumber(0, 255) + ',' + getRandomNumber(0, 255) + ', 0.7)';
+                                        colors.push(color);
+                                    }
+                                    return colors;
                                 }
-                            }
-                        });
 
+                                function getRandomNumber(min, max) {
+                                    return Math.floor(Math.random() * (max - min + 1)) + min;
+                                }
 
-                        function getRandomColorArray(length) {
-                            var colors = [];
-                            for (var i = 0; i < length; i++) {
-                                var color = 'rgba(' + getRandomNumber(0, 255) + ',' + getRandomNumber(0, 255) + ',' + getRandomNumber(0, 255) + ', 0.7)';
-                                colors.push(color);
-                            }
-                            return colors;
-                        }
+                                // Первоначальное обновление диаграммы при загрузке страницы
+                                updateChart();
 
-                        function getRandomNumber(min, max) {
-                            return Math.floor(Math.random() * (max - min + 1)) + min;
-                        }
+                            </script>
+                        </div>
 
-                        // Первоначальное обновление диаграммы при загрузке страницы
-                        updateChart();
+                        <div class="my-charts-sub">
+                            <!-- Вторая диаграмма по количеству Math олимпиадников по предметам за года -->
+                            <div class="school-chart">
+                                <canvas id="mathChart" width="600" height="400"></canvas>
+                                <script>
+                                    var years = @Html.Raw(Json.Serialize(Model.OlympiadDataByMath.Select(d => d.Year).ToArray()));
+                                    var counts = @Html.Raw(Json.Serialize(Model.OlympiadDataByMath.Select(d => d.Count).ToArray()));
 
-                    </script>
-                </div>
-
-                <!-- Вторая диаграмма по количеству олимпиадников по предметам за года -->
-                <div class="school-chart">
-                    <canvas id="myChartBySubject" width="600" height="400"></canvas>
-                    <script>
-                        var subjects = @Html.Raw(Json.Serialize(Model.OlympiadDataBySubject.Select(d => d.Subject).ToArray()));
-                        var subjectDataByYear = @Html.Raw(Json.Serialize(Model.OlympiadDataBySubject.GroupBy(d => d.Year).ToDictionary(
-                        group => group.Key,
-                        group => group.Select(g => g.Count).ToArray()
-                        )));
-
-                        var ctxBySubject = document.getElementById('myChartBySubject').getContext('2d');
-                        var myChartBySubject = new Chart(ctxBySubject, {
-                            type: 'bar',
-                            data: {
-                                labels: subjects,
-                                datasets: Object.keys(subjectDataByYear).map(function (year) {
-                                    return {
-                                        label: year,
-                                        data: subjectDataByYear[year],
-                                        backgroundColor: getRandomColorArray(subjects.length),
-                                        borderColor: 'rgba(0, 0, 0, 1)',
-                                        borderWidth: 1
-                                    };
-                                })
-                            },
-                            options: {
-                                scales: {
-                                    yAxes: [{
-                                        ticks: {
-                                            beginAtZero: true
+                                    var ctx = document.getElementById('mathChart').getContext('2d');
+                                    var mathChart = new Chart(ctx, {
+                                        type: 'bar',
+                                        data: {
+                                            labels: years,
+                                            datasets: [{
+                                                label: 'Кількість учасників олімпіади з математики по роках',
+                                                data: counts,
+                                                backgroundColor: getRandomColorArray(8),
+                                                borderColor: 'rgba(0, 0, 0, 1)',
+                                                borderWidth: 1
+                                            }]
+                                        },
+                                        options: {
+                                            scales: {
+                                                yAxes: [{
+                                                    ticks: {
+                                                        beginAtZero: true
+                                                    }
+                                                }]
+                                            }
                                         }
-                                    }]
-                                }
-                            }
-                        });
-                    </script>
-                </div>
-            </div>
+                                    });
 
+                                </script>
+                            </div>
+
+                            <!-- Вторая диаграмма по количеству Math олимпиадников по предметам за года -->
+                            <div class="school-chart">
+                                <canvas id="ukrChart" width="600" height="400"></canvas>
+                                <script>
+                                    var years = @Html.Raw(Json.Serialize(Model.OlympiadDataByUkr.Select(d => d.Year).ToArray()));
+                                    var counts = @Html.Raw(Json.Serialize(Model.OlympiadDataByUkr.Select(d => d.Count).ToArray()));
+
+                                    var ctx = document.getElementById('ukrChart').getContext('2d');
+                                    var ukrChart = new Chart(ctx, {
+                                        type: 'bar',
+                                        data: {
+                                            labels: years,
+                                            datasets: [{
+                                                label: 'Кількість учасників олімпіади з української мови по роках',
+                                                data: counts,
+                                                backgroundColor: getRandomColorArray(8),
+                                                borderColor: 'rgba(0, 0, 0, 1)',
+                                                borderWidth: 1
+                                            }]
+                                        },
+                                        options: {
+                                            scales: {
+                                                yAxes: [{
+                                                    ticks: {
+                                                        beginAtZero: true
+                                                    }
+                                                }]
+                                            }
+                                        }
+                                    });
+
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         }
         <!-- Diagram and Statistic Area End -->
         <!-- Google Maps Start -->
-        <div class="akame-google-maps-area mt-5">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2550.433763021863!2d28.646019899999995!3d50.265159!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472c64c2a23713eb%3A0x2b4ffd416b704c12!2z0YPQuy4g0JvQtdGB0Lgg0KPQutGA0LDQuNC90LrQuCwgNywg0JbQuNGC0L7QvNC40YAsINCW0LjRgtC-0LzQuNGA0YHQutCw0Y8g0L7QsdC70LDRgdGC0YwsIDEwMDAx!5e0!3m2!1sru!2sua!4v1716546409825!5m2!1sru!2sua" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-    </div>
-</section>
-<!-- Breadcrumb Area End -->
+        <section class="breadcrumb-area section-padding-20">
+            <div class="container">
+                <div class="col-12">
+                    <h2 class="mb-30 school-title">Школа на карті</h2>
+                </div>
+                <div class="container">
+                    <div class="border-top mt-3"></div>
+                </div>
+                <div class="akame-google-maps-area mt-5">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2550.433763021863!2d28.646019899999995!3d50.265159!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472c64c2a23713eb%3A0x2b4ffd416b704c12!2z0YPQuy4g0JvQtdGB0Lgg0KPQutGA0LDQuNC90LrQuCwgNywg0JbQuNGC0L7QvNC40YAsINCW0LjRgtC-0LzQuNGA0YHQutCw0Y8g0L7QsdC70LDRgdGC0YwsIDEwMDAx!5e0!3m2!1sru!2sua!4v1716546409825!5m2!1sru!2sua" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </section>
+        <!-- Breadcrumb Area End -->
 
-<script>
-    function addReaction(event, element, SchoolID, isLike) {
-        event.preventDefault();
+        <script>
+            function addReaction(event, element, SchoolID, isLike) {
+                event.preventDefault();
 
-        fetch('/Ajax/AddReaction', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ SchoolID: SchoolID, IsLike: isLike })
-        }).then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error('Помилка при додаванні реакції. Cпочатку зареєструйтеся.');
+                fetch('/Ajax/AddReaction', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ SchoolID: SchoolID, IsLike: isLike })
+                }).then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Помилка при додаванні реакції. Cпочатку зареєструйтеся.');
+                    }
+                }).then(data => {
+                    console.log(data); // Логируем данные для отладки
+                    element.style.color = isLike ? '#4F9269' : '#FF0000'; // змінити колір залежно від реакції
+                    document.querySelector('#likes-count').textContent = `Лайки: ${data.likesCount}`;
+                    document.querySelector('#dislikes-count').textContent = `Дизлайки: ${data.dislikesCount}`;
+                }).catch(error => {
+                    alert(error.message);
+                });
             }
-        }).then(data => {
-            console.log(data); // Логируем данные для отладки
-            element.style.color = isLike ? '#4F9269' : '#FF0000'; // змінити колір залежно від реакції
-            document.querySelector('#likes-count').textContent = `Лайки: ${data.likesCount}`;
-            document.querySelector('#dislikes-count').textContent = `Дизлайки: ${data.dislikesCount}`;
-        }).catch(error => {
-            alert(error.message);
-        });
-    }
-</script>
+        </script>

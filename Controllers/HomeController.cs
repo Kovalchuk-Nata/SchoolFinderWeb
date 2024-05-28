@@ -132,16 +132,25 @@ namespace SchoolFinderWeb.Controllers
                 })
                 .ToList();
 
-            var olympiadDataBySubject = schoolDB.VUO
-                 .Where(v => v.SchoolId == id)
-                 .GroupBy(v => new { v.OlimpiadYear, v.Subject })
-                 .Select(g => new OlympiadDataBySubject
+            var olympiadDataByMath = schoolDB.VUO
+                 .Where(v => v.SchoolId == id && v.Subject == "Математика")
+                 .GroupBy(v => v.OlimpiadYear)
+                 .Select(g => new OlympiadDataByYear
+                {
+                    Year = g.Key,
+                    Count = g.Count()
+                })
+                .ToList();
+
+            var olympiadDataByUkr = schoolDB.VUO
+                 .Where(v => v.SchoolId == id && v.Subject == "Українська мова")
+                 .GroupBy(v => v.OlimpiadYear)
+                 .Select(g => new OlympiadDataByYear
                  {
-                     Year = g.Key.OlimpiadYear,
-                     Subject = g.Key.Subject,
+                     Year = g.Key,
                      Count = g.Count()
                  })
-                 .ToList();
+                .ToList();
 
             var viewModel = new SchoolProfileViewModel
             {
@@ -149,7 +158,8 @@ namespace SchoolFinderWeb.Controllers
                 LikesCount = likesCount,
                 DislikesCount = dislikesCount,
                 OlympiadDataByYear = olympiadData,
-                OlympiadDataBySubject = olympiadDataBySubject
+                OlympiadDataByMath = olympiadDataByMath,
+                OlympiadDataByUkr = olympiadDataByUkr
             };
 
             return View(viewModel);
