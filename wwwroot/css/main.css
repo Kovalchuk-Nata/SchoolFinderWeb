@@ -11,7 +11,7 @@
     background-color: #05160985;
 }
 
-.welcome-text-carousel{
+.welcome-text-carousel {
     color: #e5eaee;
 }
 
@@ -19,7 +19,7 @@
     margin: 15px 0;
 }
 
-.filter-label{
+.filter-label {
     padding: 0 5px;
     font-size: 17px;
 }
@@ -29,13 +29,13 @@
     font-weight: 200;
 }
 
-.school-results{
+.school-results {
     display: flex;
 }
 
 .school-text-name {
     text-align: left;
-    padding-left: 30px;
+    padding-left: 15px;
 }
 
 
@@ -52,7 +52,7 @@
     justify-content: center;
 }
 
-.articles-title{
+.articles-title {
     margin: 10px;
     padding: 0 50px;
 }
@@ -112,7 +112,6 @@
     justify-content: center;
     flex-wrap: wrap;
     align-items: center;
-
 }
 
 .text-center {

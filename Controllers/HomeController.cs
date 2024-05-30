@@ -70,6 +70,11 @@ namespace SchoolFinderWeb.Controllers
                 filteredSchools = filteredSchools.Where(p => p.AdditionalOpportunities == model.IsAdditionalOpportunities.Value);
             }
 
+            var userId = userManager.GetUserId(User);
+            ViewBag.Favorites = schoolDB.FavoriteSchools.Where(f => f.UserID == userId).Select(f => f.SchoolID).ToList() ?? new List<int>();
+            ViewBag.Compares = schoolDB.Compare.Where(f => f.UserID == userId).Select(f => f.SchoolID).ToList() ?? new List<int>();
+
+
             var viewModel = new FindSchoolViewModel
             {
                 Districts = districts,
@@ -86,7 +91,7 @@ namespace SchoolFinderWeb.Controllers
             return View(viewModel);
         }
 
-       
+
         [Route("/articles")]
         public IActionResult Articles()
         {
@@ -94,7 +99,7 @@ namespace SchoolFinderWeb.Controllers
             return View(articles);
         }
 
-        
+
         [Route("/articles/{id}")]
         public IActionResult ArticleView(int id)
         {
@@ -106,7 +111,7 @@ namespace SchoolFinderWeb.Controllers
             return View(article);
         }
 
-        
+
         [Route("/findschool/{id}")]
         public IActionResult FindSchoolView(int id)
         {
@@ -171,7 +176,7 @@ namespace SchoolFinderWeb.Controllers
         {
             return View();
         }
-          
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

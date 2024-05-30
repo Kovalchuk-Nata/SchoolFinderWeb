@@ -2,6 +2,8 @@
 @model FindSchoolViewModel
 @{
     ViewData["Title"] = "Find cool school";
+    List<int> favorites = (List<int>)ViewBag.Favorites;
+    List<int> compares = (List<int>)ViewBag.Compares;
 }
 
 <!-- Breadcrumb Area Start -->
@@ -90,42 +92,43 @@
 
                     <form method="get">
                         @*<div class="filter-widget">
-                            <h4>Тип школи</h4>
-                            <label class="filter-label"><input type="checkbox"> Державна</label>
-                            <label class="filter-label"><input type="checkbox"> Приватна</label>
+                        <h4>Тип школи</h4>
+                        <label class="filter-label"><input type="checkbox"> Державна</label>
+                        <label class="filter-label"><input type="checkbox"> Приватна</label>
                         </div>*@
                         @*<div class="filter-widget">
-                            <h4>??? Формат навчання ???</h4>
-                            <label class="filter-label"><input type="checkbox"> Офлайн</label>
-                            <label class="filter-label"><input type="checkbox"> Дистанційне</label>
-                            <label class="filter-label"><input type="checkbox"> Онлайн</label>
+                        <h4>??? Формат навчання ???</h4>
+                        <label class="filter-label"><input type="checkbox"> Офлайн</label>
+                        <label class="filter-label"><input type="checkbox"> Дистанційне</label>
+                        <label class="filter-label"><input type="checkbox"> Онлайн</label>
                         </div>*@
                         @*<div class="filter-widget">
-                            <h4>Ціна навчання</h4>
-                            <label class="filter-label"><input class="form-control" type="input"></label>
+                        <h4>Ціна навчання</h4>
+                        <label class="filter-label"><input class="form-control" type="input"></label>
                         </div>*@
                         @*<div class="filter-widget">
-                            <h4>Район міста</h4>
-                            <label class="filter-label"><input type="checkbox"> Богунський</label>
-                            <label class="filter-label"><input type="checkbox"> Корольовський</label>
+                        <h4>Район міста</h4>
+                        <label class="filter-label"><input type="checkbox"> Богунський</label>
+                        <label class="filter-label"><input type="checkbox"> Корольовський</label>
                         </div>*@
                         @*<div class="filter-widget">
-                            <h4>Группа продовженного дня</h4>
-                            <label class="filter-label"><input type="checkbox"> Так</label>
+                        <h4>Группа продовженного дня</h4>
+                        <label class="filter-label"><input type="checkbox"> Так</label>
                         </div>*@
- @*                       <div class="filter-widget">
-                            <h4>Поглиблене навчання</h4>
-                            <p>(гуманітарне/математичне тощо)</p>
-                            <label class="filter-label"><input type="checkbox"> Так</label>
+                        @*                       <div class="filter-widget">
+                        <h4>Поглиблене навчання</h4>
+                        <p>(гуманітарне/математичне тощо)</p>
+                        <label class="filter-label"><input type="checkbox"> Так</label>
                         </div>
                         <div class="filter-widget">
-                            <h4>Додаткові освітні можливості</h4>
-                            <p>(програми або активності, такі як спорт, мистецтво, мови, наукові клуби)</p>
-                            <label class="filter-label"><input type="checkbox"> Так</label>
+                        <h4>Додаткові освітні можливості</h4>
+                        <p>(програми або активності, такі як спорт, мистецтво, мови, наукові клуби)</p>
+                        <label class="filter-label"><input type="checkbox"> Так</label>
                         </div>*@
                         <!-- Додати інші критерії фільтрації тут -->
-@*                        <button type="submit" class="btn akame-btn">Пошук</button>
-*@                    </form>
+                        @*                        <button type="submit" class="btn akame-btn">Пошук</button>
+                        *@
+                    </form>
                 </div>
 
             </div>
@@ -134,11 +137,12 @@
             <div class="col-lg-9">
                 <!-- Результати вибору шкіл -->
                 <div class="">
-                    @if(Model.Schools.Count > 0) {
+                    @if (Model.Schools.Count > 0)
+                    {
                         foreach (var school in Model.Schools)
                         {
                             <div class="single-service-area mb-30 wow fadeInUp school-results"
-                             data-wow-delay="200ms">
+                         data-wow-delay="200ms">
                                 <div class="">
                                     <img src="img/core-img/education.png" alt="" width="128px">
                                 </div>
@@ -150,31 +154,35 @@
                                         </p>
                                     </a>
                                 </div>
-                                
+
                                 <div class="favotites-btn">
                                     <!-- Кнопка для добавления в избранное -->
                                     <div class="heart-icon ml-5 mt-4 mt-lg-0">
-                                        <a href="#"><i class="icon_heart" onclick="addToFavorites(event, this, @school.SchoolID)"></i></a>
+                                        <a href="#">
+                                            <i class="icon_heart" onclick="addToFavorites(event, this, @school.SchoolID)"
+                                       style="@(favorites.Contains(school.SchoolID) ? "color: rgb(79, 146, 105);" : "" )"></i>
+                                        </a>
                                     </div>
 
                                     <!-- Кнопка для добавления в сравнение -->
                                     <div>
                                         <a href="#" onclick="addToCompare(event, this, @school.SchoolID)" class="btn akame-btn active">
-                                            <i class="icon_plus"></i> Додати в порівняння
+                                            <i class="@(compares.Contains(school.SchoolID) ? "" : "icon_plus")"></i> @(compares.Contains(school.SchoolID) ? "У порівнянні" : "Додати в порівняння")
                                         </a>
                                     </div>
                                 </div>
 
                             </div>
                         }
-                    } else
+                    }
+                    else
                     {
                         <h5>Школи за Вашим запитом не знайдені. Спробуйте змінити параметри</h5>
                     }
 
                 </div>
             </div>
-            
+
         </div>
     </div>
 </section>
@@ -212,9 +220,10 @@
             body: JSON.stringify({ SchoolID: SchoolID })
         }).then(response => {
             if (response.ok) {
-                element.style.color = '#4F9269';
+                element.innerHTML = "";
+                element.textContent = "У порівнянні";
             } else {
-                alert('Помилка при додаванні у вибране.');
+                alert('Помилка при додаванні у порівняння.');
             }
         });
     }

@@ -31,14 +31,20 @@ namespace SF.Controllers
                 return Unauthorized();
             }
 
+            var favorites = schoolDB.FavoriteSchools.Where(f => f.UserID == userId).Select(f => f.SchoolID).ToList() ?? new List<int>();
+
             var favoriteItem = new FavoriteSchool
             {
                 UserID = userId,
                 SchoolID = model.SchoolID
             };
 
-            schoolDB.FavoriteSchools.Add(favoriteItem);
-            await schoolDB.SaveChangesAsync();
+            if (!favorites.Contains(model.SchoolID))
+            {
+                schoolDB.FavoriteSchools.Add(favoriteItem);
+                await schoolDB.SaveChangesAsync();
+            }
+
 
             return Ok();
         }
@@ -58,7 +64,7 @@ namespace SF.Controllers
 
             var favoriteItem = schoolDB.FavoriteSchools.FirstOrDefault(f => f.UserID == userId && f.SchoolID == model.SchoolID);
 
-            if(favoriteItem != null)
+            if (favoriteItem != null)
             {
                 schoolDB.FavoriteSchools.Remove(favoriteItem);
                 await schoolDB.SaveChangesAsync();
@@ -89,8 +95,13 @@ namespace SF.Controllers
                 SchoolID = model.SchoolID
             };
 
-            schoolDB.Compare.Add(compareItem);
-            await schoolDB.SaveChangesAsync();
+            var compares = schoolDB.Compare.Where(f => f.UserID == userId).Select(f => f.SchoolID).ToList() ?? new List<int>();
+
+            if (!compares.Contains(model.SchoolID))
+            {
+                schoolDB.Compare.Add(compareItem);
+                await schoolDB.SaveChangesAsync();
+            }
 
             return Ok();
         }
