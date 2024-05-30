@@ -12,34 +12,52 @@
         <div class="col-12">
             <h2 class="mb-30 school-title">@Model.School.Name</h2>
         </div>
-        <div class="school-container p-4 mb-4">
+        <div class="school-container p-3">
             <div class="school-details">
                 <p class="school-detail">Адреса: @Model.School.Address</p>
-                <p class="school-detail">Район: @Model.School.District</p>
+                @* <p class="school-detail">Район: @Model.School.District</p>*@
                 <p class="school-detail">Тип школи: @Model.School.Type</p>
                 <p class="school-detail">Ціна: @Model.School.Price грн</p>
+                <p class="school-detail">Формат навчання: Офлайн</p>
                 <p class="school-detail">Группа продовженного дня: @Model.School.ExtendedDayGroups</p>
+                <p class="school-detail">Додаткові освітні можливості: @Model.School.ExtendedDayGroups</p>
+                <p class="school-detail">Поглиблене вивчення (гуманітарне, математичне тощо): @Model.School.Specialization</p>
+                <p class="school-detail">Наявність додаткових освітніх можливостей: @Model.School.AdditionalOpportunities</p>
+                <p class="school-detail">Наявність укриття: @Model.School.AdditionalOpportunities</p>
 
-                <p class="article-details">@Model.School.Description</p>
             </div>
             <div>
                 <img src="~/img/core-img/school.png" alt="" width="256px">
             </div>
         </div>
-        <!--  -->
-        <div class="likes mt-4">
-            <!-- Кнопка для like -->
-            <div class="heart-icon ml-5 mt-4 mt-lg-0">
-                <a href="#"><i class="icon_like_alt" onclick="addReaction(event, this, @Model.School.SchoolID, true)"></i></a>
-                <p id="likes-count">Лайки: @Model.LikesCount</p>
-            </div>
-            <!-- Кнопка для dislike -->
-            <div class="heart-icon ml-5 mt-4 mt-lg-0">
-                <a href="#"><i class="icon_dislike_alt" onclick="addReaction(event, this, @Model.School.SchoolID, false)"></i></a>
-                <p id="dislikes-count">Дизлайки: @Model.DislikesCount</p>
-            </div>
+        <div>
+            <div class="findschool-btn">
+                <!-- Кнопка для добавления в избранное -->
+                <div class="heart-icon mt-4 mt-lg-0">
+                    <a href="#" onclick="addToFavorites(event, this, @Model.School.SchoolID)" class="btn akame-btn active mt-4"> В обране</a>
+                </div>
 
+                <div class="likes mt-4">
+                    <!-- Кнопка для like -->
+                    <div class="heart-icon ml-5 mt-4 mt-lg-0">
+                        <a href="#"><i class="icon_like_alt" onclick="addReaction(event, this, @Model.School.SchoolID, true)"></i></a>
+                        <p id="likes-count">Лайки: @Model.LikesCount</p>
+                    </div>
+                    <!-- Кнопка для dislike -->
+                    <div class="heart-icon ml-5 mt-4 mt-lg-0">
+                        <a href="#"><i class="icon_dislike_alt" onclick="addReaction(event, this, @Model.School.SchoolID, false)"></i></a>
+                        <p id="dislikes-count">Дизлайки: @Model.DislikesCount</p>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <!-- Опис школи -->
+        <div class="school-desc">
+            <hr />
+            <p class="article-details">@Model.School.Description</p>
+        </div>
+
 
         <!-- Diagram and Statistic Area Start -->
         @if (Model.OlympiadDataByYear != null && Model.OlympiadDataByYear.Any())
@@ -195,6 +213,25 @@
         <!-- Breadcrumb Area End -->
 
         <script>
+            function addToFavorites(event, element, SchoolID) {
+
+                event.preventDefault();
+
+                fetch('/Ajax/AddFavorites', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ SchoolID: SchoolID })
+                }).then(response => {
+                    if (response.ok) {
+                        element.style.color = '#4F9269';
+                    } else {
+                        alert('Помилка при додаванні у вибране.');
+                    }
+                });
+            }
+            
             function addReaction(event, element, SchoolID, isLike) {
                 event.preventDefault();
 

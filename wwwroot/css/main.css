@@ -175,3 +175,8 @@
 .school-item {
     min-height: 20px;
 }
+
+.findschool-btn {
+    display: flex;
+    justify-content: space-between;
+}

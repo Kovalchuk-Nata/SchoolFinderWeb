@@ -64,6 +64,14 @@
                             }
                         </div>
                         <br>
+                        <div class="filter-widget">
+                            <h4>Формат навчання</h4>
+                            <label class="filter-label"><input type="checkbox"> Офлайн</label>
+                            <label class="filter-label"><input type="checkbox"> Дистанційне</label>
+                            <label class="filter-label"><input type="checkbox"> Онлайн</label>
+                            <label class="filter-label"><input type="checkbox"> Змішане</label>
+                        </div>
+                        <br>
                         <div>
                             <h4>Вартість навчання, до</h4>
                             <input type="number" class="form-control" id="maxPrice" name="MaxPrice" value="@(Model.MaxPrice ?? null)" />
@@ -144,9 +152,9 @@
                                 </div>
                                 <div class="col school-text-name">
                                     <a href="/findschool/@school.SchoolID" class="">
-                                        <h4>Школа #1 ID: @school.Name</h4>
+                                        <h4>@school.Name</h4>
                                         <p>
-                                            @school.Type школа, Ціна: ₴@school.Price, Район: @school.District
+                                            @school.Type школа, Ціна: ₴@school.Price, Район: @school.District, Формат навчання: Офлайн
                                         </p>
                                     </a>
                                 </div>
