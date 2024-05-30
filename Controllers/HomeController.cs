@@ -72,6 +72,11 @@ namespace SchoolFinderWeb.Controllers
                 filteredSchools = filteredSchools.Where(p => p.AdditionalOpportunities == model.IsAdditionalOpportunities.Value);
             }
 
+            var userId = userManager.GetUserId(User);
+            ViewBag.Favorites = schoolDB.FavoriteSchools.Where(f => f.UserID == userId).Select(f => f.SchoolID).ToList() ?? new List<int>();
+            ViewBag.Compares = schoolDB.Compare.Where(f => f.UserID == userId).Select(f => f.SchoolID).ToList() ?? new List<int>();
+
+
             var viewModel = new FindSchoolViewModel
             {
                 Districts = districts,
