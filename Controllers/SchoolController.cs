@@ -20,7 +20,6 @@ namespace SchoolFinderWeb.Controllers
 
         public SchoolController(ILogger<HomeController> logger, ApplicationDbContext schoolDB, UserManager<User> userManager)
         {
-            _logger = logger;
             this.schoolDB = schoolDB;
             this._userManager = userManager;
         }
