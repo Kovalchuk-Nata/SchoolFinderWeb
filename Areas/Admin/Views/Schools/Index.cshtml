@@ -23,7 +23,6 @@
         columns.Add(model => model.ExtendedDayGroups).Titled("Група ПД");
         columns.Add(model => model.Specialization).Titled("Спеціалізація");
         columns.Add(model => model.AdditionalOpportunities).Titled("AdditionalOpportunities");
-        //columns.Add(model => model.Description).Titled("Description");
         columns.Add(model => model.isConfirmed).Titled("Підтверджено");
 
         columns.Add(model => $"<a class=\"btn btn-sm btn-primary\" href=\"Schools\\Edit\\{model.SchoolID}\">Редагувати</a>  " +

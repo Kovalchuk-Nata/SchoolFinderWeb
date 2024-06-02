@@ -15,8 +15,6 @@ namespace SchoolFinderWeb.Controllers
     [Authorize(Roles = "Organizator, Admin")]
     public class SchoolController : Controller
     {
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext schoolDB;
         private readonly UserManager<User> _userManager;
 

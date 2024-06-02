@@ -38,6 +38,28 @@ namespace SchoolFinderWeb.Models
         [Display(Name = "Опис")]
         public string Description { get; set; }
 
+
+        //
+        [Required]
+        [Display(Name = "Класи")]
+        public string Classes { get; set; }
+
+        [Display(Name = "Наявність укриття")]
+        public bool Shelter { get; set; }
+
+        [Required]
+        [Display(Name = "Формат навчання")]
+        public string Format { get; set; }
+
+        [Display(Name = "Участь у всеукраїнських олімпіадах")]
+        public bool PaticipationVUO { get; set; }
+
+        [Display(Name = "Школа на карті")]
+        public string Maps { get; set; }
+        //
+
+
+
         [Display(Name = "Підтверджено")]
         public bool isConfirmed { get; set; }
 

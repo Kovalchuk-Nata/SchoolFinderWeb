@@ -30,8 +30,20 @@
     </div>
 </section>
 <!-- Breadcrumb Area End -->
+
 <!-- School Selection Area Start -->
 <section class="akame-portfolio section-padding-80 clearfix">
+    <!-- Додано кнопку сортування -->
+    <div class="sort-button m-3" style="
+    align-items: end;
+    display: flex;
+    justify-content: flex-end;
+">
+        <form method="get">
+            <input type="hidden" name="SortByParticipants" value="true">
+            <button type="submit" class="btn akame-btn">Сортувати за кількістю учасників</button>
+        </form>
+    </div>
     <div class="container">
         <div class="row">
             <!-- Фильтры/Критерии Start -->
@@ -65,13 +77,28 @@
                                 </div>
                             }
                         </div>
+                        
                         <br>
-                        <div class="filter-widget">
+                        <div>
                             <h4>Формат навчання</h4>
-                            <label class="filter-label"><input type="checkbox"> Офлайн</label>
-                            <label class="filter-label"><input type="checkbox"> Дистанційне</label>
-                            <label class="filter-label"><input type="checkbox"> Онлайн</label>
-                            <label class="filter-label"><input type="checkbox"> Змішане</label>
+                            @foreach (var format in Model.Format)
+                            {
+                                <div>
+                                    <input type="checkbox" id="district_@format" name="SelectedFormat" value="@format" @(Model.SelectedFormat.Contains(format) ? "checked" : "") />
+                                    <label for="brand_@format">@format</label>
+                                </div>
+                            }
+                        </div>
+                        <br>
+                        <div>
+                            <h4>Класи</h4>
+                            @foreach (var classes in Model.Classes)
+                            {
+                                <div>
+                                    <input type="checkbox" id="district_@classes" name="SelectedClasses" value="@classes" @(Model.SelectedClasses.Contains(classes) ? "checked" : "") />
+                                    <label for="brand_@classes">@classes</label>
+                                </div>
+                            }
                         </div>
                         <br>
                         <div>
@@ -93,50 +120,20 @@
                             <p>(програми або активності, такі як спорт, мистецтво, мови, наукові клуби)</p>
                             <label class="filter-label"><input type="checkbox" id="isAdditionalOpportunities" name="IsAdditionalOpportunities" value="true" @(Model.IsAdditionalOpportunities.HasValue && Model.IsAdditionalOpportunities.Value ? "checked" : "")> Так</label>
                         </div>
+                        <div class="filter-widget">
+                            <h4>Наявність укриття</h4>
+                            <label class="filter-label"><input type="checkbox" id="IsShelter" name="IsShelter" value="true" @(Model.IsShelter.HasValue && Model.IsShelter.Value ? "checked" : "") /> Так</label>
+                        </div>
+                        <div class="filter-widget">
+                            <h4>Участь у Всеукраїнських олімпіадах</h4>
+                            <label class="filter-label"><input type="checkbox" id="IsPaticipationVUO" name="IsPaticipationVUO" value="true" @(Model.IsPaticipationVUO.HasValue && Model.IsPaticipationVUO.Value ? "checked" : "") /> Так</label>
+                        </div>
                         <button type="submit" class="btn akame-btn">Пошук</button>
                     </form>
                     <br>
                     <br>
 
-                    <form method="get">
-                        @*<div class="filter-widget">
-                        <h4>Тип школи</h4>
-                        <label class="filter-label"><input type="checkbox"> Державна</label>
-                        <label class="filter-label"><input type="checkbox"> Приватна</label>
-                        </div>*@
-                        @*<div class="filter-widget">
-                        <h4>??? Формат навчання ???</h4>
-                        <label class="filter-label"><input type="checkbox"> Офлайн</label>
-                        <label class="filter-label"><input type="checkbox"> Дистанційне</label>
-                        <label class="filter-label"><input type="checkbox"> Онлайн</label>
-                        </div>*@
-                        @*<div class="filter-widget">
-                        <h4>Ціна навчання</h4>
-                        <label class="filter-label"><input class="form-control" type="input"></label>
-                        </div>*@
-                        @*<div class="filter-widget">
-                        <h4>Район міста</h4>
-                        <label class="filter-label"><input type="checkbox"> Богунський</label>
-                        <label class="filter-label"><input type="checkbox"> Корольовський</label>
-                        </div>*@
-                        @*<div class="filter-widget">
-                        <h4>Группа продовженного дня</h4>
-                        <label class="filter-label"><input type="checkbox"> Так</label>
-                        </div>*@
-                        @*                       <div class="filter-widget">
-                        <h4>Поглиблене навчання</h4>
-                        <p>(гуманітарне/математичне тощо)</p>
-                        <label class="filter-label"><input type="checkbox"> Так</label>
-                        </div>
-                        <div class="filter-widget">
-                        <h4>Додаткові освітні можливості</h4>
-                        <p>(програми або активності, такі як спорт, мистецтво, мови, наукові клуби)</p>
-                        <label class="filter-label"><input type="checkbox"> Так</label>
-                        </div>*@
-                        <!-- Додати інші критерії фільтрації тут -->
-                        @*                        <button type="submit" class="btn akame-btn">Пошук</button>
-                        *@
-                    </form>
+                    
                 </div>
 
             </div>
@@ -158,7 +155,7 @@
                                     <a href="/findschool/@school.SchoolID" class="">
                                         <h4>@school.Name</h4>
                                         <p>
-                                            @school.Type школа, Ціна: ₴@school.Price, Район: @school.District, Формат навчання: Офлайн
+                                            @school.Type школа, Ціна: ₴@school.Price, Район: @school.District, Формат навчання: @school.Format, Класи: @school.Classes 
                                         </p>
                                     </a>
                                 </div>

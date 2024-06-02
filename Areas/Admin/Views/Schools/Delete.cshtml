@@ -66,13 +66,46 @@
             <textarea asp-for="Description" class="form-control" rows="4"></textarea>
             <span asp-validation-for="Description" ></span>
         </div>
-        <!-- 
-            <div class="mb-3">
-            <label asp-for="Photo"></label>
-            <input asp-for="Photo" type="file" class="form-control" />
-            <span asp-validation-for="Photo" ></span>
+        <div class="mb-3">
+            <label asp-for="Classes"></label>
+            <select asp-for="Classes" class="form-control">
+                <option value="Молодша">Молодша (1-4 класи)</option>
+                <option value="Середня">Середня (5-9 класи)</option>
+                <option value="Старша">Старша (10-11 класи)</option>
+                <option value="Повна">1-11 класи</option>
+                <option value="Повна">1-11 класи</option>
+            </select>
+            <span asp-validation-for="Classes" class="text-danger"></span>
         </div>
-        -->
+
+        <div class="mb-3">
+            <label asp-for="Format"></label>
+            <select asp-for="Format" class="form-control">
+                <option value="Онлайн">Онлайн</option>
+                <option value="Офлайн">Офлайн</option>
+                <option value="Дистанційне">Дистанційне</option>
+                <option value="Змішане">Змішане</option>
+            </select>
+            <span asp-validation-for="Format" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Shelter"></label>
+            <input asp-for="Shelter" type="checkbox" />
+            <span asp-validation-for="Shelter" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="PaticipationVUO"></label>
+            <input asp-for="PaticipationVUO" type="checkbox" />
+            <span asp-validation-for="PaticipationVUO" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Maps"></label>
+            <input asp-for="Maps" class="form-control" />
+            <span asp-validation-for="Maps" class="text-danger"></span>
+        </div>
         
         <div class="mb-3">
             <label asp-for="isConfirmed"></label>

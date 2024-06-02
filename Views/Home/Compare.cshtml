@@ -63,6 +63,7 @@
     </div>
 </section>
 <!-- Breadcrumb Area End -->
+
 <!-- School Selection Area Start -->
 <section class="akame-portfolio section-padding-80 clearfix">
 
@@ -99,10 +100,27 @@
                                             <p>Район: @compare.School?.District</p>
                                         </div>
                                         <hr>
+                                        <div class="school-item">
+                                            <p>Формат: @compare.School?.Format</p>
+                                        </div>
+                                        <hr>
+                                        <div class="school-item">
+                                            <p>Класи: @compare.School?.Classes</p>
+                                        </div>
+                                        <hr>
+                                        <div class="school-item">
+                                            <p>Група ПД: @compare.School?.ExtendedDayGroups</p>
+                                        </div>
+                                        <hr>
+                                        <div class="school-item">
+                                            <p>Район: @compare.School?.District</p>
+                                        </div>
+                                        <hr>
+
                                     </a>
                                 </div>
                                 <div class="compare-btn">
-                                    <!-- Кнопка для добавления в сравнение -->
+                                    <!-- Кнопка для удаления с сравнения -->
                                     <div class="mt-3">
                                         <a href="#" onclick="delFromCompare(@compare.School?.SchoolID)" class="btn akame-btn active">Прибрати</a>
                                     </div>

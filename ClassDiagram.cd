@@ -59,7 +59,7 @@
   <Class Name="SchoolFinderWeb.Models.School">
     <Position X="8.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAQAAAQAgAAgACAAAAAwAAAAAAAACAQAAAAAAIEA=</HashCode>
+      <HashCode>AAACAQAAAQEgAAgACAAAgAwAAAgAAAACAQAAAAAAIEA=</HashCode>
       <FileName>Models\School.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -85,7 +85,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SchoolFinderWeb.Data.RoleInitializer">
-    <Position X="1" Y="3.5" Width="1.5" />
+    <Position X="5" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Data\RoleInitializer.cs</FileName>
@@ -130,10 +130,14 @@
     <InheritanceLine Type="Microsoft.AspNetCore.Mvc.Controller" FixedToPoint="true">
       <Path>
         <Point X="3.25" Y="7.191" />
-        <Point X="3.25" Y="7.375" />
-        <Point X="8.398" Y="7.375" />
-        <Point X="8.398" Y="10.096" />
-        <Point X="9.188" Y="10.096" />
+        <Point X="3.25" Y="7.408" />
+        <Point X="4.102" Y="7.408" />
+        <Point X="4.102" Y="10.096" />
+        <Point X="6.648" Y="10.096" />
+        <Point X="6.648" Y="12.096" />
+        <Point X="8.398" Y="12.096" />
+        <Point X="8.398" Y="10.148" />
+        <Point X="9.188" Y="10.148" />
         <Point X="9.188" Y="10.25" />
       </Path>
     </InheritanceLine>

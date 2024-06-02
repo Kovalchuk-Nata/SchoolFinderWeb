@@ -39,6 +39,8 @@ namespace SchoolFinderWeb.Controllers
 
             var districts = schoolDB.School.Select(s => s.District).Distinct().ToList();
             var types = schoolDB.School.Select(s => s.Type).Distinct().ToList();
+            var format = schoolDB.School.Select(s => s.Format).Distinct().ToList();
+            var classes = schoolDB.School.Select(s => s.Classes).Distinct().ToList();
 
             var filteredSchools = schoolDB.School.AsQueryable();
 
@@ -72,6 +74,32 @@ namespace SchoolFinderWeb.Controllers
                 filteredSchools = filteredSchools.Where(p => p.AdditionalOpportunities == model.IsAdditionalOpportunities.Value);
             }
 
+            if (model.SelectedFormat != null && model.SelectedFormat.Any())
+            {
+                filteredSchools = filteredSchools.Where(p => model.SelectedFormat.Contains(p.Format));
+            }
+
+            if (model.SelectedClasses != null && model.SelectedClasses.Any())
+            {
+                filteredSchools = filteredSchools.Where(p => model.SelectedClasses.Contains(p.Format));
+            }
+
+            if (model.IsShelter.HasValue)
+            {
+                filteredSchools = filteredSchools.Where(p => p.Shelter == model.IsShelter.Value);
+            }
+            
+            if (model.IsPaticipationVUO.HasValue)
+            {
+                filteredSchools = filteredSchools.Where(p => p.PaticipationVUO == model.IsPaticipationVUO.Value);
+            }
+
+            // Додавання сортування за кількістю учасників в олімпіаді
+            if (Request.Query.ContainsKey("SortByParticipants"))
+            {
+                filteredSchools = filteredSchools.OrderByDescending(s => schoolDB.VUO.Count(v => v.SchoolId == s.SchoolID));
+            }
+
             var userId = userManager.GetUserId(User);
             ViewBag.Favorites = schoolDB.FavoriteSchools.Where(f => f.UserID == userId).Select(f => f.SchoolID).ToList() ?? new List<int>();
             ViewBag.Compares = schoolDB.Compare.Where(f => f.UserID == userId).Select(f => f.SchoolID).ToList() ?? new List<int>();
@@ -81,12 +109,18 @@ namespace SchoolFinderWeb.Controllers
             {
                 Districts = districts,
                 Types = types,
+                Format = format,
+                Classes = classes,
                 SelectedDistricts = model.SelectedDistricts ?? new List<string>(),
+                SelectedFormat = model.SelectedFormat ?? new List<string>(),
+                SelectedClasses = model.SelectedClasses ?? new List<string>(),
                 SelectedTypes = model.SelectedTypes ?? new List<string>(),
                 MaxPrice = model.MaxPrice,
                 IsExtendedDayGroups = model.IsExtendedDayGroups,
                 IsSpecialization = model.IsSpecialization,
                 IsAdditionalOpportunities = model.IsAdditionalOpportunities,
+                IsShelter = model.IsShelter,
+                IsPaticipationVUO = model.IsPaticipationVUO,
                 Schools = filteredSchools.ToList()
             };
 
