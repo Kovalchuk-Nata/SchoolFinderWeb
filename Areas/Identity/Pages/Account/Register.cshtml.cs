@@ -126,14 +126,17 @@ namespace SchoolFinderWeb.Areas.Identity.Pages.Account
                     // Додати користувача до ролі
                     if (user.UserType == UserTypes.Parent)
                     {
+                        user.IsConfirmed = true;
                         _userManager.AddToRoleAsync(user, "Parent").Wait();
                     }
                     else if (user.UserType == UserTypes.Organizator)
                     {
+                        user.IsConfirmed = false;
                         _userManager.AddToRoleAsync(user, "Organizator").Wait();
                     }
                     else if (user.UserType == UserTypes.Admin)
                     {
+                        user.IsConfirmed = true;
                         _userManager.AddToRoleAsync(user, "Admin").Wait();
                     }
 

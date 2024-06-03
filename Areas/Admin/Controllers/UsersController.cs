@@ -113,11 +113,11 @@ namespace SchoolFinderWeb.Areas.Admin.Controllers
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
-            
+
             return View(obj);
         }
 
-        
+
         //TODO сделать правильную работу в редактировании юзера в поле пароль
         //GET
         public IActionResult Edit(string? id)
@@ -141,8 +141,8 @@ namespace SchoolFinderWeb.Areas.Admin.Controllers
                 FirstName = userId.FirstName,
                 LastName = userId.LastName
             };
-            
-            
+
+
 
             return View(userView);
         }
@@ -152,25 +152,22 @@ namespace SchoolFinderWeb.Areas.Admin.Controllers
         [AutoValidateAntiforgeryToken]
         public IActionResult Edit(EditUserViewModel obj)
         {
+            var user = schoolDB.Users.FirstOrDefault(c => c.Id == obj.Id);
 
-            //if (ModelState.IsValid)
-            //{
-                var user = schoolDB.Users.FirstOrDefault(c => c.Id == obj.Id);
+            if (user == null)
+            {
+                return NotFound();
+            }
 
-                if(user == null)
-                {
-                    return NotFound();
-                }
+            user.FirstName = obj.FirstName;
+            user.LastName = obj.LastName;
+            user.UserType = obj.UserType;
+            user.IsConfirmed = obj.IsConfirmed;
+            schoolDB.Users.Update(user);
+            schoolDB.SaveChanges();
 
-                user.FirstName = obj.FirstName;
-                user.LastName = obj.LastName;
-                user.UserType = obj.UserType;
-                schoolDB.Users.Update(user);
-                schoolDB.SaveChanges();
-            
             return RedirectToAction("Index");
-            //}
-            //return View(obj);
+
 
         }
 
@@ -203,7 +200,7 @@ namespace SchoolFinderWeb.Areas.Admin.Controllers
             schoolDB.SaveChanges();
             return RedirectToAction("Index");
         }
-        
+
         private User CreateUser()
         {
             try
@@ -246,6 +243,9 @@ namespace SchoolFinderWeb.Areas.Admin.Controllers
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
+
+        [Display(Name = "Confirmed")]
+        public bool IsConfirmed { get; set; }
 
 
 

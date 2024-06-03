@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchoolFinderWeb.Data;
 
@@ -11,9 +12,10 @@ using SchoolFinderWeb.Data;
 namespace SchoolFinderWeb.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240603105901_editArticlesAndUser")]
+    partial class editArticlesAndUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -190,7 +192,7 @@ namespace SchoolFinderWeb.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Article", (string)null);
+                    b.ToTable("Article");
                 });
 
             modelBuilder.Entity("SchoolFinderWeb.Models.Compare", b =>
@@ -214,7 +216,7 @@ namespace SchoolFinderWeb.Data.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Compare", (string)null);
+                    b.ToTable("Compare");
                 });
 
             modelBuilder.Entity("SchoolFinderWeb.Models.FavoriteSchool", b =>
@@ -238,7 +240,7 @@ namespace SchoolFinderWeb.Data.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("FavoriteSchools", (string)null);
+                    b.ToTable("FavoriteSchools");
                 });
 
             modelBuilder.Entity("SchoolFinderWeb.Models.Likes", b =>
@@ -265,7 +267,7 @@ namespace SchoolFinderWeb.Data.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Likes", (string)null);
+                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("SchoolFinderWeb.Models.School", b =>
@@ -335,7 +337,7 @@ namespace SchoolFinderWeb.Data.Migrations
 
                     b.HasKey("SchoolID");
 
-                    b.ToTable("School", (string)null);
+                    b.ToTable("School");
                 });
 
             modelBuilder.Entity("SchoolFinderWeb.Models.User", b =>
@@ -453,7 +455,7 @@ namespace SchoolFinderWeb.Data.Migrations
 
                     b.HasIndex("SchoolId");
 
-                    b.ToTable("VUO", (string)null);
+                    b.ToTable("VUO");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -16,5 +16,8 @@ namespace SchoolFinderWeb.Areas.Admin.ViewModel
         [Display(Name = "Тип користувача")]
         public UserTypes UserType { get; set;}
 
+        [Display(Name = "Користувача підтверджено")]
+        public bool IsConfirmed { get; set;}
+
     }
 }

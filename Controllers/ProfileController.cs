@@ -60,7 +60,8 @@ namespace SchoolFinderWeb.Controllers
                 Id = userId.Id,
                 UserType = userId.UserType,
                 FirstName = userId.FirstName,
-                LastName = userId.LastName
+                LastName = userId.LastName,
+                IsConfirmed= userId.IsConfirmed
             };
 
 
@@ -83,6 +84,7 @@ namespace SchoolFinderWeb.Controllers
             user.FirstName = obj.FirstName;
             user.LastName = obj.LastName;
             user.UserType = obj.UserType;
+            user.IsConfirmed = obj.IsConfirmed;
             schoolDB.Users.Update(user);
             schoolDB.SaveChanges();
 

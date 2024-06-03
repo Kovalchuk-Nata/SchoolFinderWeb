@@ -16,11 +16,12 @@
     .Grid(Model)
     .Build(columns =>
     {
-        columns.Add(model => model.FirstName).Titled("First Name");
-        columns.Add(model => model.LastName).Titled("Last Name");
-        columns.Add(model => model.Email).Titled("Email");
+        columns.Add(model => model.FirstName).Titled("Ім'я");
+        columns.Add(model => model.LastName).Titled("Прізвище");
+        columns.Add(model => model.Email).Titled("Пошта");
         //columns.Add(model => model.Password).Titled("Password").RenderValueAs(model => "********"); // Пароль не відображається повністю
-        columns.Add(model => model.UserType).Titled("User Type");
+        columns.Add(model => model.UserType).Titled("Роль");
+        columns.Add(model => model.IsConfirmed).Titled("Підтверджено");
 
         columns.Add(model => $"<a class=\"btn btn-sm btn-primary\" href=\"Users\\Edit\\{model.Id}\">Edit</a>  " +
             $"<a class=\"btn btn-sm btn-danger\" href=\"Users\\Delete\\{model.Id}\">Delete</a>"
