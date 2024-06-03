@@ -92,6 +92,10 @@ namespace SchoolFinderWeb.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [DataType(DataType.PhoneNumber)]
+            [Display(Name = "Phone number")]
+            public string PhoneNumber { get; set; }
         }
 
 
@@ -112,6 +116,7 @@ namespace SchoolFinderWeb.Areas.Identity.Pages.Account
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
                 user.UserType = Input.UserType;
+                user.PhoneNumber = Input.PhoneNumber;
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _userEmailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);

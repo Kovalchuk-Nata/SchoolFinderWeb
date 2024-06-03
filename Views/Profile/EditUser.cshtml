@@ -34,13 +34,33 @@
     </div>
 </section>
 <!-- Breadcrumb Area End -->
-
 <!-- School Selection Area Start -->
 <section class="akame-portfolio section-padding-40 clearfix">
     <div class="container">
         <div class="row user-edit-center">
             <!-- Кнопки сбоку Start -->
             <div class="col-lg-3">
+                <div class="portfolio-filters">
+                    <!-- Profile Buttons Start-->
+                    <div class="profile-buttons">
+                        <div class="mt-30 mb-30">
+                            <a href="/Identity/Account/Manage/Email" class="btn akame-btn profile-btn active">Змінити пошту</a>
+                        </div>
+
+                        <div class="mb-30">
+                            <a href="/Identity/Account/Manage/ChangePassword" class="btn akame-btn profile-btn active">Змінити пароль</a>
+                        </div>
+
+                        <div class="mb-30">
+                            <a href="/Identity/Account/Manage/DeletePersonalData" class="btn akame-btn profile-btn active" style="background-color: #b30707;border-color: #b30707;">Видалити аккаунт</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Кнопки сбоку End-->
+
+            <div class="col-lg-9">
+
                 <form method="post" asp-action="Edit">
                     <div class="">
 
@@ -63,6 +83,4 @@
                         </div>
                 </form>
             </div>
-        </div>
-    </div>
 </section>

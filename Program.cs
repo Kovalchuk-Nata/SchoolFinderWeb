@@ -18,7 +18,7 @@ builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfi
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-// Добавление UserStore для работы с пользователями
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ UserStore пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 builder.Services.AddScoped<IUserStore<User>, UserStore<User, IdentityRole, ApplicationDbContext>>();
 builder.Services.AddScoped<IUserEmailStore<User>>(provider => (IUserEmailStore<User>)provider.GetRequiredService<IUserStore<User>>());
 
