@@ -24,7 +24,6 @@ namespace SchoolFinderWeb.Controllers
             this._userManager = userManager;
         }
 
-
         //GET
         [Route("schoolProfile")]
         public IActionResult SchoolProfile()
@@ -98,7 +97,6 @@ namespace SchoolFinderWeb.Controllers
             return View(school);
         }
 
-
         //POST
         [HttpPost]
         [AutoValidateAntiforgeryToken]
@@ -113,11 +111,5 @@ namespace SchoolFinderWeb.Controllers
             }
             return View(obj);
         }
-
-        
-
-
-
-
     }
 }

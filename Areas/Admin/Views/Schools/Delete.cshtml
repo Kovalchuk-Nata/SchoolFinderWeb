@@ -5,114 +5,116 @@
 
 <h1>Delete?</h1>
 
+
 <form method="post" asp-action="Delete">
     <div class="border p-3 mt-4">
-        <input asp-for="SchoolID" hidden />
-        <div class="mb-3">
-            <label asp-for="SchoolID"></label>
-            <input asp-for="SchoolID" class="form-control" />
-            <span asp-validation-for="SchoolID"></span>
-        </div>
-        <div asp-validation-summary="All"></div>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SchoolID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SchoolID)
+        </dd>
 
-        <div class="mb-3">
-            <label asp-for="Name"></label>
-            <input asp-for="Name" class="form-control" />
-            <span asp-validation-for="Name"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="Address"></label>
-            <input asp-for="Address" class="form-control" />
-            <span asp-validation-for="Address"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="District"></label>
-            <select asp-for="District" class="form-control">
-                <option value="Богунський">Богунський</option>
-                <option value="Корольовський">Корольовський</option>
-            </select>
-            <span asp-validation-for="District"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="Type"></label>
-            <select asp-for="Type" class="form-control">
-                <option value="Державна">Державна</option>
-                <option value="Приватна">Приватна</option>
-            </select>
-            <span asp-validation-for="Type"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="Price"></label>
-            <input asp-for="Price" class="form-control" />
-            <span asp-validation-for="Price"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="ExtendedDayGroups"></label>
-            <input asp-for="ExtendedDayGroups" type="checkbox" />
-            <span asp-validation-for="ExtendedDayGroups" ></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="Specialization"></label>
-            <input asp-for="Specialization" type="checkbox" />
-            <span asp-validation-for="Specialization"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="AdditionalOpportunities"></label>
-            <input asp-for="AdditionalOpportunities" type="checkbox" />
-            <span asp-validation-for="AdditionalOpportunities" ></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="Description"></label>
-            <textarea asp-for="Description" class="form-control" rows="4"></textarea>
-            <span asp-validation-for="Description" ></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="Classes"></label>
-            <select asp-for="Classes" class="form-control">
-                <option value="Молодша">Молодша (1-4 класи)</option>
-                <option value="Середня">Середня (5-9 класи)</option>
-                <option value="Старша">Старша (10-11 класи)</option>
-                <option value="Повна">1-11 класи</option>
-                <option value="Повна">1-11 класи</option>
-            </select>
-            <span asp-validation-for="Classes" class="text-danger"></span>
-        </div>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
 
-        <div class="mb-3">
-            <label asp-for="Format"></label>
-            <select asp-for="Format" class="form-control">
-                <option value="Онлайн">Онлайн</option>
-                <option value="Офлайн">Офлайн</option>
-                <option value="Дистанційне">Дистанційне</option>
-                <option value="Змішане">Змішане</option>
-            </select>
-            <span asp-validation-for="Format" class="text-danger"></span>
-        </div>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
 
-        <div class="mb-3">
-            <label asp-for="Shelter"></label>
-            <input asp-for="Shelter" type="checkbox" />
-            <span asp-validation-for="Shelter" class="text-danger"></span>
-        </div>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.District)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.District)
+        </dd>
 
-        <div class="mb-3">
-            <label asp-for="PaticipationVUO"></label>
-            <input asp-for="PaticipationVUO" type="checkbox" />
-            <span asp-validation-for="PaticipationVUO" class="text-danger"></span>
-        </div>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Type)
+        </dd>
 
-        <div class="mb-3">
-            <label asp-for="Maps"></label>
-            <input asp-for="Maps" class="form-control" />
-            <span asp-validation-for="Maps" class="text-danger"></span>
-        </div>
-        
-        <div class="mb-3">
-            <label asp-for="isConfirmed"></label>
-            <input asp-for="isConfirmed" type="checkbox" />
-            <span asp-validation-for="isConfirmed"></span>
-        </div>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ExtendedDayGroups)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ExtendedDayGroups)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Specialization)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Specialization)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AdditionalOpportunities)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AdditionalOpportunities)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Classes)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Classes)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Format)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Format)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Shelter)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Shelter)
+        </dd>
+
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Maps)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Maps)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.isConfirmed)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.isConfirmed)
+        </dd>
+
         <button type="submit" class="btn btn-primary" style="width:150px">Delete</button>
     </div>
-
 </form>
+
