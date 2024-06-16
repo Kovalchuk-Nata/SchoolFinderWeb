@@ -42,7 +42,11 @@ namespace SchoolFinderWeb.Controllers
             var format = schoolDB.School.Select(s => s.Format).Distinct().ToList();
             var classes = schoolDB.School.Select(s => s.Classes).Distinct().ToList();
 
+            // var filteredSchools = schoolDB.School.AsQueryable();
             var filteredSchools = schoolDB.School.AsQueryable();
+
+            // Добавляем условие для фильтрации подтвержденных школ
+            filteredSchools = filteredSchools.Where(s => s.isConfirmed);
 
             if (model.SelectedDistricts != null && model.SelectedDistricts.Any())
             {

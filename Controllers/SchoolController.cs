@@ -65,28 +65,38 @@ namespace SchoolFinderWeb.Controllers
         [AutoValidateAntiforgeryToken]
         public IActionResult Create(SchoolViewModel obj)
         {
+
             var userId = _userManager.GetUserId(User);
+            if (ModelState.IsValid)
+            {
+                School school = new School();
+                school.Name = obj.Name;
+                school.Address = obj.Address;
+                school.District = obj.District;
+                school.Type = obj.Type;
+                school.Price = obj.Price;
+                school.ExtendedDayGroups = obj.ExtendedDayGroups;
+                school.Specialization = obj.Specialization;
+                school.AdditionalOpportunities = obj.AdditionalOpportunities;
+                school.Description = obj.Description;
 
-            School school = new School();
-            school.Name = obj.Name;
-            school.Address = obj.Address;
-            school.District = obj.District;
-            school.Type = obj.Type;
-            school.Price = obj.Price;
-            school.ExtendedDayGroups = obj.ExtendedDayGroups;
-            school.Specialization = obj.Specialization;
-            school.AdditionalOpportunities = obj.AdditionalOpportunities;
-            school.Description = obj.Description;
-            school.UserId = userId;
+                school.Classes = obj.Classes;
+                school.Shelter = obj.Shelter;
+                school.Format = obj.Format;
+                school.PaticipationVUO = obj.PaticipationVUO;
 
-            schoolDB.School.Add(school);
-            schoolDB.SaveChanges();
-            return RedirectToAction("SchoolProfile");
+                school.UserId = userId;
+
+                schoolDB.School.Add(school);
+                schoolDB.SaveChanges();
+                return RedirectToAction("SchoolProfile");
+            }
+            return View(obj);
         }
 
         //GET
         [Route("/editSchool")]
-        public async Task<IActionResult> EditSchool()
+        public async Task<IActionResult> Edit()
         {
             var userId = _userManager.GetUserId(User);
             var school = await schoolDB.School.FirstOrDefaultAsync(s => s.UserId == userId);
@@ -98,6 +108,7 @@ namespace SchoolFinderWeb.Controllers
         }
 
         //POST
+        [Route("/editSchool")]
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public IActionResult Edit(School obj)

@@ -20,11 +20,44 @@
                 <p class="school-detail">Ціна: @Model.School.Price грн</p>
                 <p class="school-detail">Формат навчання: @Model.School.Format</p>
                 <p class="school-detail">Класи: @Model.School.Classes</p>
-                <p class="school-detail">Группа продовженного дня: @Model.School.ExtendedDayGroups</p>
-                <p class="school-detail">Додаткові освітні можливості: @Model.School.ExtendedDayGroups</p>
-                <p class="school-detail">Поглиблене вивчення (гуманітарне, математичне тощо): @Model.School.Specialization</p>
-                <p class="school-detail">Наявність додаткових освітніх можливостей: @Model.School.AdditionalOpportunities</p>
-                <p class="school-detail">Наявність укриття: @Model.School.Shelter</p>
+
+                @if (@Model.School.ExtendedDayGroups)
+                {
+                    <p class="school-detail"> Группа продовженного дня: Є</p>
+                }
+                else
+                {
+                    <p class="school-detail"> Группа продовженного дня: Немає</p>
+                }
+                </p>
+
+                @if (@Model.School.Specialization)
+                {
+                    <p class="school-detail">Поглиблене вивчення (гуманітарне, математичне тощо): Є</p>
+                }
+                else
+                {
+                    <p class="school-detail">Поглиблене вивчення (гуманітарне, математичне тощо):Немає</p>
+                }
+
+                @if (@Model.School.AdditionalOpportunities)
+                {
+                    <p class="school-detail">Наявність додаткових освітніх можливостей: Є</p>
+                }
+                else
+                {
+                    <p class="school-detail">Наявність додаткових освітніх можливостей: Немає</p>
+                }
+
+                @if (@Model.School.Shelter)
+                {
+                    <p class="school-detail"> Наявність укриття: Є</p>
+                }
+                else
+                {
+                    <p class="school-detail"> Наявність укриття: Немає</p>
+                }
+                </p>
             </div>
             <div>
                 <img src="~/img/core-img/school.png" alt="" width="256px">
@@ -231,6 +264,26 @@
                         element.style.color = '#4F9269';
                     } else {
                         alert('Помилка при додаванні у вибране.');
+                    }
+                });
+            }
+
+            function addToCompare(event, element, SchoolID) {
+
+                event.preventDefault();
+
+                fetch('/Ajax/AddCompare', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ SchoolID: SchoolID })
+                }).then(response => {
+                    if (response.ok) {
+                        element.innerHTML = "";
+                        element.textContent = "У порівнянні";
+                    } else {
+                        alert('Помилка при додаванні у порівняння.');
                     }
                 });
             }

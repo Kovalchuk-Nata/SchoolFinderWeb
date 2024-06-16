@@ -18,6 +18,8 @@ namespace SF.Controllers
             userManager = _userManager;
         }
 
+
+        // FAVORITES (ADD + DELETE)
         [HttpPost]
         public async Task<IActionResult> AddFavorites([FromBody] FavoriteViewModel model)
         {
@@ -77,7 +79,7 @@ namespace SF.Controllers
 
         }
 
-        // COMPARISON
+        // COMPARISON (ADD + DELETE)
         [HttpPost]
         public async Task<IActionResult> AddCompare([FromBody] FavoriteViewModel model)
         {

@@ -97,7 +97,6 @@
         });
     }
 
-
     function addToCompare(event, element, SchoolID) {
 
         event.preventDefault();
@@ -110,9 +109,10 @@
             body: JSON.stringify({ SchoolID: SchoolID })
         }).then(response => {
             if (response.ok) {
-                element.style.color = '#4F9269';
+                element.innerHTML = "";
+                element.textContent = "У порівнянні";
             } else {
-                alert('Помилка при додаванні у вибране.');
+                alert('Помилка при додаванні у порівняння.');
             }
         });
     }

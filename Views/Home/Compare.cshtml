@@ -77,10 +77,12 @@
                 {
                     <div class="swiper-slide">
                         <div class="single-service-area mb-30 wow fadeInUp school-results" style="width:300px">
+
                             <!-- Кнопка для добавления в избранное -->
                             <div class="heart-icon mt-4 mt-lg-0">
                                 <a href="#"><i class="icon_heart" onclick="addToFavorites(event, this, @compare.School?.SchoolID)"></i></a>
                             </div>
+
                             <div class="results-compare-item">
                                 <div class="">
                                     <img src="img/core-img/education.png" alt="" width="128px">
@@ -109,15 +111,46 @@
                                         </div>
                                         <hr>
                                         <div class="school-item">
-                                            <p>Група ПД: @compare.School?.ExtendedDayGroups</p>
+                                            @if (@compare.School?.ExtendedDayGroups == true)
+                                            {
+                                                <p>Група ПД: Є</p>
+                                            }
+                                            else
+                                            {
+                                                <p>Група ПД: Немає</p>
+                                            }
                                         </div>
                                         <hr>
                                         <div class="school-item">
-                                            <p>Поглиблене навчання: @compare.School?.Specialization</p>
+                                            @if (@compare.School?.Specialization == true)
+                                            {
+                                                <p>Поглиблене навчання: Є</p>
+                                            } else
+                                            {
+                                                <p>Поглиблене навчання: Немає </p>
+                                            }
                                         </div>
                                         <hr>
                                         <div class="school-item">
-                                            <p>Участь в олімпіадах: @compare.School?.PaticipationVUO</p>
+                                            @if (@compare.School?.Shelter == true)
+                                            {
+                                                <p>Укриття: Є</p>
+                                            }
+                                            else
+                                            {
+                                                <p>Укриття: Немає </p>
+                                            }
+                                        </div>
+                                        <hr>
+                                        <div class="school-item">
+                                            @if (@compare.School?.PaticipationVUO == true)
+                                            {
+                                                <p>Участь школи у Всеукраїнських Олімпіадах: Так</p>
+                                            } else
+                                            {
+                                                <p>Участь школи у Всеукраїнських Олімпіадах: Ні</p>
+                                            }
+                                            
                                         </div>
                                         <hr>
 
@@ -176,6 +209,7 @@
             }
         });
     }
+
 
     function delFromCompare(SchoolID) {
         fetch('/Ajax/DelFromCompare', {
