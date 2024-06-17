@@ -85,7 +85,7 @@ namespace SchoolFinderWeb.Controllers
 
             if (model.SelectedClasses != null && model.SelectedClasses.Any())
             {
-                filteredSchools = filteredSchools.Where(p => model.SelectedClasses.Contains(p.Format));
+                filteredSchools = filteredSchools.Where(p => model.SelectedClasses.Contains(p.Classes));
             }
 
             if (model.IsShelter.HasValue)
